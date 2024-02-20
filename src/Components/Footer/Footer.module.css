@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.appFooter {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #43BE32;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+}
+
+.isoCopy {
+    align-items: center;
+    display: flex;
+}
+
+.isoCopy img {
+    max-width: 100%;
+    height: auto;
+}
+
+.copyRigth {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin-left: 1rem;
+}
+
+.contIcons {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contIcons img {
+    max-width: 100%;
+    height: auto;
+}
+
+.iconsFooter {
+    margin-left: 3rem;
+}
+
+/* @media query para pantallas más pequeñas */
+@media (max-width: 800px) {
+
+    .isoCopy img {
+        display: block;
+        max-width: 50%;
+    }
+    
+    .contIcons img {
+        padding: 0.5rem;
+        display: block;
+        max-width: 50%;
+    }
+}

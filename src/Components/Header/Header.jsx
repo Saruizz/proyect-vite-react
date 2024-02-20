@@ -35,7 +35,7 @@ const Header = () => {
 			className={`${styles.appHeader} ${menuOpen ? styles.mobileMenuOpen : ''}`}
 		>
 			<LogoLema />
-			<Buscador />
+			{/* <Buscador/> */}
 			<div className={styles.authSection}>
 				{/* Renderiza el icono para dispositivos móviles */}
 				<div>
