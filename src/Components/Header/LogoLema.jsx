@@ -1,11 +1,12 @@
-import imagenes from '../../assets/imagenes';
+import img from '../../assets/img';
 import styles from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 const LogoLema = () => {
 	return (
-		<a href='../../App.jsx' className={styles.logoSection}>
-			<img src={imagenes.lemaLogo} />
-		</a>
+		<Link to={'/'} className={styles.logoLink}>
+			<img className={styles.logoLema} src={img.logoLemaA} />
+		</Link>
 	);
 };
 

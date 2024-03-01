@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+/* Foter */
 .appFooter {
     width: 100%;
-    position: fixed;
     bottom: 0;
     background-color: #43BE32;
     color: #fff;
@@ -12,9 +10,10 @@
     padding: 2rem 3rem;
 }
 
+/* Isologo */
 .isoCopy {
-    align-items: center;
     display: flex;
+    align-items: center;
 }
 
 .isoCopy img {
@@ -22,13 +21,24 @@
     height: auto;
 }
 
+.isoLogoWidth {
+    width: 80px;
+}
+
+/* Copyrigth*/
 .copyRigth {
+    display: flex;
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     margin-left: 1rem;
 }
 
+.copyRigthPhone {
+    display: none;
+}
+
+
+/* Iconos */
 .contIcons {
     justify-content: space-between;
     align-items: center;
@@ -40,20 +50,39 @@
 }
 
 .iconsFooter {
+    width: 35px;
     margin-left: 3rem;
 }
+
 
 /* @media query para pantallas más pequeñas */
 @media (max-width: 800px) {
 
+    /* Footer */
+    .appFooter {
+        padding: 0.7rem;
+    }
+
+    /* Isologo */
     .isoCopy img {
         display: block;
-        max-width: 50%;
+        max-width: 30%;
     }
-    
+
+    /* Copyrigth */
+    .copyRigth {
+        display: none;
+    }
+
+    .copyRigthPhone {
+        display: flex;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 0.6rem;
+    }
+
+    /* Iconos*/
     .contIcons img {
-        padding: 0.5rem;
-        display: block;
-        max-width: 50%;
+        display: none;
     }
 }
