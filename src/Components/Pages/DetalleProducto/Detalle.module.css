@@ -14,7 +14,7 @@
 
 /* FOTOS */
 .contNombreCarro {
-    color: #1F3F27;
+    color: var(--verdeOscuro);
     background-color: #D9D9D9;
     padding: 1.5rem 1rem 4rem 4rem;
 }
@@ -27,7 +27,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    background-color: #D9D9D9;
+    background-color: var(--grisClaro);
     justify-content: center;
     align-items: center;
 }
@@ -72,7 +72,7 @@
     width: 15rem;
     overflow: hidden;
     margin: 0.25rem;
-    background-color: #fff;
+    background-color: var(--blanco);
     border-radius: 7px;
 }
 
@@ -86,26 +86,26 @@
     display: flex;
     justify-content: end;
     padding: 2.5rem;
-    background-color: #D9D9D9;
+    background-color: var(--grisClaro);
     border-radius: 0 0 10px 12px;
 }
 
 .btnVerMas {    
     padding: 0.7rem 3rem;
-    background-color: #43BE32;
-    color: #fff;
+    background-color: var(--verdeClaro);
+    color: var(--blanco);
     font-size: 16px;
     font-weight: 550;
-    border: 1px solid #43BE32;
+    border: 1px solid var(--verdeClaro);
     border-radius: 5px;
     cursor: pointer;
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btnVerMas:hover {
-    color: #fff;
-    background-color: #1F3F27;
-    border: 1px solid #1F3F27;
+    color: var(--blanco);
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeOscuro);
 }
 
 /*DESCRIPCION*/

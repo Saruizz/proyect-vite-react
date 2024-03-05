@@ -3,7 +3,7 @@
     position: fixed;
     z-index: 100;
     top: 0; left: 0; right: 0;
-    background-color: #fff;
+    background-color: var(--blanco);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,11 +48,11 @@
 .btn {
     margin-left: 10px;
     padding: 0.5rem 3rem;
-    background-color: #fff;
-    color: #43BE32;
+    background-color: var(--blanco);
+    color: var(--verdeClaro);
     font-size: 16px;
     font-weight: 550;
-    border: 1px solid #43BE32;
+    border: 1px solid var(--verdeClaro);
     border-radius: 5px;
     cursor: pointer;
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
@@ -60,8 +60,8 @@
 
 .btn:hover {
     color: #fff;
-    background-color: #1F3F27;
-    border: 1px solid #1F3F27;
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeOscuro);
 }
 
 .authButtons {
@@ -84,8 +84,8 @@
     position: absolute;
     top: 60px;
     right: 20px;
-    background-color: #1F3F27;
-    border: 1px solid #43BE32;
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeClaro);
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 2rem;

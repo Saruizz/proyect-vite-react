@@ -2,8 +2,8 @@
 .appFooter {
     width: 100%;
     bottom: 0;
-    background-color: #43BE32;
-    color: #fff;
+    background-color: var(--verdeClaro);
+    color: var(--blanco);
     display: flex;
     justify-content: space-between;
     align-items: center;
