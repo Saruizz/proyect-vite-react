@@ -10,6 +10,7 @@ const Footer = () => {
 				<span className={styles.copyRigth}>©2024 Drive4Life</span>
 				<span className={styles.copyRigthPhone}>©2024 Drive4Life Booking</span>
 			</div>
+			{/*
 			<div className={styles.contIcons}>
 				<Link to={'https://www.facebook.com/'} target='_blank'>
 					<img className={styles.iconsFooter} src={imagenes.iconoFacebook} />
@@ -24,6 +25,7 @@ const Footer = () => {
 					<img className={styles.iconsFooter} src={imagenes.iconoIg} />
 				</Link>
 			</div>
+			*/}
 		</div>
 	);
 };

@@ -17,6 +17,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    flex-direction: row;
     background-color: var(--verdeOscuro);
 }
 
@@ -58,7 +59,7 @@
 }
 
 .itemInputBusqueda input:focus{
-    color: var(--blanco);
+    color: var(--negro);
     border-color: var(--negro);
 }
 
@@ -140,6 +141,7 @@
 /* CONTAINER RECOMENDACIONES*/
 .recomendaciones {
     display: flex;
+    flex-direction: column;
     width: 100vw;
     background-color: var(--grisClaro);
 }

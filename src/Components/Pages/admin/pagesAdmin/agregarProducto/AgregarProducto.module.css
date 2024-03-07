@@ -1,0 +1,105 @@
+.agregar {
+    margin:auto;
+    margin-top: 10vh;
+    margin-bottom: 15vh;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    font-family: "Poppins" ;
+    padding: 2%;
+}
+
+.agregar h1 {
+    color: var(--verdeOscuro);
+}
+
+.form {
+    width: 95vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor {
+    margin: 20px;
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20;
+}
+
+.descripcion {
+    height: 50%;
+}
+
+
+.btSubmit {
+    color: #FFFFFF;
+    font-family: "Poppins" ;
+    font-weight: bold;
+    padding: 15px 25px;
+    background-color: var(--verdeClaro);
+    border: none;
+    cursor: pointer;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+}
+
+.btSubmit:hover {
+    background-color: var(--verdeOscuro);
+}
+
+.agregar input {
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Poppins" ;
+    border: 2px solid var(--grisClaro);
+    box-shadow: 0 0 0.5px var(--grisClaro);
+}
+
+.fileInput input[type='file'] {
+    display: none;
+}
+
+.fileInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fileInput label {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background-color: var(--verdeOscuro);
+    color: var(--blanco);
+    border-radius: 25px;
+    padding: 15px 25px;
+    font-weight: bold;
+    text-align: center;
+    width: fit-content;
+}
+
+.fileInput label:hover {
+    background-color: var(--verdeClaro);
+}
+
+/* .imagenes {
+    margin-left: 20px;
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+} */
+
+.izquierda {
+    display: flex;
+    align-items: flex-start;
+}

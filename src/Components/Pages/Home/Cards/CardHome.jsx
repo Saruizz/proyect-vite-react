@@ -12,17 +12,17 @@ const CardHome = () => {
 		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/04%20Chevrolet%20Onix-01.jpg?alt=media&token=f2d5e5ca-db22-4b19-a52d-6145dc63facf',
 		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/05%20Chevrolet%20Optra-01.jpg?alt=media&token=e65933ea-f4da-44ac-870f-ef099718baba',
 	];
-	const [info, setInfo] = useState([]);
+	const [carInfo, setCarInfo] = useState([]);
 
 	useEffect(() => {
 		axios.get('https://jsonplaceholder.typicode.com/comments').then(res => {
-			setInfo(res.data.slice(0, 6));
+			setCarInfo(res.data.slice(0, 6));
 		});
 	}, []);
 
 	return (
 		<div className={styles.home}>
-			{info.map((info, index) => (
+			{carInfo.map((carInfo, index) => (
 				<div className={styles.card}>
 					<span className={styles.datos}>
 						<img
@@ -32,17 +32,16 @@ const CardHome = () => {
 						/>
 					</span>
 					<span className={styles.datos}>
-						<h2>{info.name}</h2> {/*nombre*/}
-						<p className={styles.descripcion}>{info.body}</p> {/*descripcion*/}
-						<Link
-							to={{
-								pathname: '/pagina-destino',
-								state: { datos: datosParaEnviar },
-							}}
-							className={styles.btCard}
-						>
-							Ver más
-						</Link>
+						<h2>{carInfo.name}</h2> {/*nombre*/}
+						<div>
+							<div>
+								<p className={styles.descripcion}>{carInfo.body}</p>{' '}
+								{/*descripcion*/}
+							</div>
+							<div className={styles.contLink}>
+								<Link className={styles.btCard}>Ver más</Link>
+							</div>
+						</div>
 					</span>
 				</div>
 			))}

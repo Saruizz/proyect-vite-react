@@ -1,0 +1,16 @@
+.noDisponible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    width: 70%;
+    margin: auto;
+}
+
+.noDisponible p {
+    color: var(--grisPlomo);
+    font-size: large;
+    text-align: center;
+    font-weight: bold;
+}

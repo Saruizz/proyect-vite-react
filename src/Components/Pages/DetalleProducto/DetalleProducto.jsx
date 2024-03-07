@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Detalle.module.css';
 import img from '../../../assets/img';
+import { Link } from 'react-router-dom';
 
 const DetalleProducto = () => {
 	return (
@@ -39,17 +38,15 @@ const DetalleProducto = () => {
 			</div>
 			<div className={styles.contDescripcion}>
 				<span>
-					El Mazda2, un subcompacto que ha ganado adeptos por su diseño elegante
-					y eficiencia en la conducción, ofrece una experiencia única en su
-					segmento. Desde el punto de vista estético, el Mazda2 presenta un
-					diseño exterior que destaca por su atractiva simplicidad y líneas bien
-					definidas. Aunque es un automóvil pequeño, su apariencia transmite un
-					aire de sofisticación y dinamismo, con detalles como la parrilla
-					frontal y los faros estilizados que siguen la estética KODO de Mazda.
+					fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf
+					fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf
+					fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf
+					fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf
+					fasfsafgsdfgdsf fasfsafgsdfgdsf fasfsafgsdfgdsf{' '}
 				</span>
 				<div>
 					<Link className={styles.contFlecha}>
-						<img src={img.flecha} />
+						<img src={img.volver} />
 					</Link>
 				</div>
 			</div>

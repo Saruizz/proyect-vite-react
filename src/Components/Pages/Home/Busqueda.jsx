@@ -7,10 +7,10 @@ const FormularioBusqueda = () => {
 			<img src={img.isoLogoC2} />
 			<div className={styles.contInputBusqueda}>
 				<h2>Busca tu carro ideal aquí</h2>
-				<div className={styles.itemInputBusqueda}>
+				<form className={styles.itemInputBusqueda}>
 					<input type='text' placeholder='Ej: Kia Picanto' />
 					<button>Buscar</button>
-				</div>
+				</form>
 			</div>
 			<img src={img.isoLogoC2} />
 		</div>

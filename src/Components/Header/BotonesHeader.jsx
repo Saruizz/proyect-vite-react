@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
 import imagenes from '../../assets/img';
+import { Link } from 'react-router-dom';
 
 const BotonesHeader = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -23,13 +24,17 @@ const BotonesHeader = () => {
 				{/* Renderiza los botones o el menú desplegable según la resolución */}
 				{menuOpen ? (
 					<div className={styles.mobileMenu}>
-						<button className={styles.btn}>Crear cuenta</button>
-						<button className={styles.btn}>Iniciar sesión</button>
+						<Link className={styles.btn}>Crear cuenta</Link>
+						<Link className={styles.btn}>Iniciar sesión</Link>
 					</div>
 				) : (
 					<div className={styles.authButtons}>
-						<button className={styles.btn}>Crear cuenta</button>
-						<button className={styles.btn}>Iniciar sesión</button>
+						<Link to={'/crearCuenta'} className={styles.btn}>
+							Crear cuenta
+						</Link>
+						<Link to={'/iniciarSesion'} className={styles.btn}>
+							Iniciar sesión
+						</Link>
 					</div>
 				)}
 			</div>

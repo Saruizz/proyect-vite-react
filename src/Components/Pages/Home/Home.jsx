@@ -1,14 +1,14 @@
 import React from 'react';
 import Busqueda from './Busqueda';
+import CategoriasHome from './CategoriasHome';
 import Recomendaciones from './Recomendaciones';
-import Categorias from './Categorias';
 import styles from './Home.module.css';
 
 const Home = () => {
 	return (
 		<div className={styles.appHome}>
 			<Busqueda />
-			<Categorias />
+			<CategoriasHome />
 			<Recomendaciones />
 		</div>
 	);

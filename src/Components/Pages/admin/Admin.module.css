@@ -1,0 +1,50 @@
+.admin {
+    margin:3%;
+    margin-top: 20vh;
+    margin-bottom: 15vh;
+    font-family: "Poppins" ;
+    font-size: large;
+}
+.dash {
+    display: flex;
+    font-family: "Poppins" ;
+    flex-direction: column;
+}
+
+.btDash {
+    color: var(--blanco);
+    font-family: "Poppins" ;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    width: 98%;
+    background-color: var(--verdeClaro);
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.admin h1 {
+    color: var(--verdeOscuro);
+    font-size: 24px;
+    margin-left: 10vw;
+}
+
+.admin h2 {
+    color: var(--verdeClaro);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.categoria {
+    background-color: var(--verdeOscuro);
+}
+
+.usuario {
+    background-color: var(--grisAzulado);
+}

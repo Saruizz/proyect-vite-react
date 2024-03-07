@@ -11,6 +11,10 @@
     --grisPlomo: #4F4F50;
 }
 
+button {
+    border-radius: 50px;
+}
+
 body {
     font-family: Poppins, Belanosima;
 }
