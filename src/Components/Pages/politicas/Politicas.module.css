@@ -1,0 +1,20 @@
+.contPoliticas {
+    padding-top:  8%;
+    padding-left: 5%;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--grisClaro);
+    color: var(--verdeOscuro);
+}
+
+.cont {
+    width: 90vw;
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.politica {
+    width: 24vw;
+}

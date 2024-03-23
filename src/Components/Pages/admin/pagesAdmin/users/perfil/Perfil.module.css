@@ -1,0 +1,54 @@
+.perfil {
+  margin-top: 15vh;
+	margin-bottom: 15vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.userPerfil {
+	display: flex;
+  width: 100vw;
+	flex-direction: row;
+  align-items: center;
+	justify-content: space-evenly;
+	font-weight: bold;
+  color: var(--verdeOscuro);
+}
+
+.titulo {
+	color: var(--verdeClaro);
+	font-size: 24px;
+}
+
+.informacion {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 5%;
+}
+
+.nombre {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nombre p {
+  margin: 5px;
+  border: 1px solid var(--grisClaro);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 15px;
+  width: 15vw;
+} 
+
+.p {
+  border: 1px solid var(--grisClaro);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 15px;
+  width: 31vw;
+  margin: 5px;
+}

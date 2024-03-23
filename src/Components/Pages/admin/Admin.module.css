@@ -1,0 +1,60 @@
+.admin {
+    margin:3%;
+    margin-top: 20vh;
+    margin-bottom: 15vh;
+    font-family: "Poppins" ;
+    font-size: large;
+}
+.dash {
+    display: flex;
+    font-family: "Poppins" ;
+    flex-direction: row;
+}
+
+.btDash {
+    color: var(--blanco);
+    font-family: "Poppins" ;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    width: 20vw;
+    background-color: var(--verdeClaro);
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.admin h1 {
+    color: var(--verdeOscuro);
+    font-size: 30px;
+    text-align: center;
+}
+
+.contenedor {
+    width: vw;
+    margin: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.categoria {
+    background-color: var(--verdeOscuro);
+}
+
+.usuario {
+    background-color: var(--grisAzulado);
+    margin-left: 11vw;
+}
+
+.funciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+}

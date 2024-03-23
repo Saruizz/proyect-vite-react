@@ -1,0 +1,94 @@
+/* Foter */
+.appFooter {
+    width: 100%;
+    bottom: 0;
+    background-color: var(--verdeClaro);
+    color: var(--blanco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+}
+
+/* Isologo */
+.isoCopy {
+    display: flex;
+    align-items: center;
+}
+
+.isoCopy img {
+    max-width: 100%;
+    height: auto;
+}
+
+.isoLogoWidth {
+    width: 80px;
+}
+
+/* Copyrigth*/
+.copyRigth {
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 1rem;
+}
+
+.copyRigthPhone {
+    display: none;
+}
+
+
+/* Iconos */
+.contIcons {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contIcons img {
+    max-width: 100%;
+    height: auto;
+}
+
+.iconsFooter {
+    width: 35px;
+    margin-left: 3rem;
+}
+
+/*Políticas*/
+
+.politica {
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+/* @media query para pantallas más pequeñas */
+@media (max-width: 800px) {
+
+    /* Footer */
+    .appFooter {
+        padding: 0.7rem;
+    }
+
+    /* Isologo */
+    .isoCopy img {
+        display: block;
+        max-width: 30%;
+    }
+
+    /* Copyrigth */
+    .copyRigth {
+        display: none;
+    }
+
+    .copyRigthPhone {
+        display: flex;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 0.6rem;
+    }
+
+    /* Iconos*/
+    .contIcons img {
+        display: none;
+    }
+}

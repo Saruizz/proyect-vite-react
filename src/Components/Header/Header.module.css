@@ -1,0 +1,118 @@
+.appHeader {
+    width: 100vw;
+    position: fixed;
+    z-index: 100;
+    top: 0; left: 0; right: 0;
+    background-color: var(--blanco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    @media screen and (max-width: 800px) {
+        font-size: 15px;
+    };
+    @media screen and (max-width: 600px) {
+        font-size: 14px;
+    };
+}
+
+.logoLink {
+    display: inline-block;
+    /* Para que el enlace se comporte como un bloque en línea */
+    width: max-content;
+    /* Ajusta según tus necesidades */
+}
+
+.logoLema {
+    width: 25rem;
+    @media screen and (max-width: 1200px) {
+        width: 17rem;
+    }
+    @media screen and (max-width: 930px) {
+        width: 15rem;
+    }
+    @media screen and (max-width: 930px) {
+        .logoLema {
+            width: 12rem;
+        }
+    }
+}
+
+/* Botones - Menu */
+
+.authSection {
+    display: flex;
+}
+
+.btn {
+    margin-left: 10px;
+    padding: 0.5rem 3rem;
+    background-color: var(--blanco);
+    color: var(--verdeClaro);
+    font-size: 16px;
+    font-weight: 550;
+    text-decoration: none;
+    border: 1px solid var(--verdeClaro);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeOscuro);
+}
+
+.authButtons {
+    display: flex;
+}
+
+.mobileMenuIcon {
+    max-width: 100%;
+    cursor: pointer;
+    display: none;
+    @media screen and (max-width: 760px) {
+        max-width: 60%;
+        display: block;
+    }
+}
+
+.mobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeClaro);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    /* Inicialmente oculto */
+}
+
+.mobileMenu button {
+    margin: 0.5rem;
+}
+
+/* Muestra el menú desplegable en dispositivos móviles */
+.appHeader.mobileMenuOpen .mobileMenu {
+    display: flex;
+}
+
+/* Muestra el ícono de menú en dispositivos móviles */
+@media (max-width: 760px) {
+
+    /* Menu - Botones*/
+    .mobileMenuIcon {
+        max-width: 2rem;
+        display: block;
+    }
+
+    .authButtons {
+        display: none;
+        /* Oculta los botones en pantallas pequeñas */
+    }
+}
