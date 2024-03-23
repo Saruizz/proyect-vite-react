@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './CrearCuenta.module.css';
 import img from '../../../../../../assets/img';
+
+// const handleSubmit = e => {
+// 	e.preventDefault();
+// 	const formData = new FormData();
+// 	formData.append('nombre', nombre);
+// 	formData.append('apellido', apellido);
+// 	formData.append('correoElectronico', correoElectronico);
+// 	formData.append('contraseña', contraseña);
+// 	formData.append('confirmarContraseña', confirmarContraseña);
+  
+// 	axios.post('http://localhost:8081/usuarios', formData)
+// 	  .then(response => {
+// 		console.log('Formulario enviado correctamente');
+// 		console.log(response.data);
+// 	  })
+// 	  .catch(error => {
+// 		console.error('Error al enviar el formulario', error);
+// 	  });
+//   };
 
 const CrearCuenta = () => {
 	const [nombre, setNombre] = useState('');
@@ -69,6 +89,21 @@ const CrearCuenta = () => {
 		}
 
 		// Aquí se enviaría la información del formulario al servidor
+		const formData = new FormData();
+	formData.append('nombre', nombre);
+	formData.append('apellido', apellido);
+	formData.append('correoElectronico', correoElectronico);
+	formData.append('contraseña', contraseña);
+	formData.append('confirmarContraseña', confirmarContraseña);
+  
+	axios.post('http://localhost:8081/usuarios', formData)
+	  .then(response => {
+		console.log('Formulario enviado correctamente');
+		console.log(response.data);
+	  })
+	  .catch(error => {
+		console.error('Error al enviar el formulario', error);
+	  });
 		console.log('Formulario enviado');
 	};
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './AgregarCategoria.module.css';
-import img from '../../../../../assets/img'
+import img from '../../../../../assets/img';
+import Swal from 'sweetalert2';
 
 const AgregarCategoria = () => {
 	const [categoria, setCategoria] = useState('');
@@ -10,7 +11,7 @@ const AgregarCategoria = () => {
 	const [imagen, setImagen] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/comments').then(res => {
+		axios.get('http://localhost:8081/categorias/').then(res => {
 			setCategoria(res.data);
 		});
 	}, []);
@@ -47,13 +48,21 @@ const AgregarCategoria = () => {
 		e.preventDefault();
 
 		axios
-			.post('https://jsonplaceholder.typicode.com/posts', {
+			.post('http://localhost:8081/categorias', {
 				titulo,
 				descripcion,
 				imagen,
 			})
 			.then(() => {
-				alert('Categoría agregada exitosamente');
+				Swal.fire({
+					title: "¡Categoría agregada exitosamente!",
+					icon: "success",
+					confirmButtonText: 'Aceptar',
+					customClass: {
+					  confirmButton: styles.botonCategoria,
+					},
+					buttonsStyling: false,
+				  });
 				setTitulo('');
 				setDescripcion('');
 				setImagen([]);
@@ -68,7 +77,7 @@ const AgregarCategoria = () => {
 	};
 
 	return (
-		<div className={styles.categoria}> 
+		<div className={styles.categoria}>
 			<h1>Agregar categoría</h1>
 			<form onSubmit={handleSubmit}>
 				<span className={styles.contCategoria}>
@@ -85,35 +94,26 @@ const AgregarCategoria = () => {
 						required
 					/>
 					<label>Descripción</label>
-					<input
-						type='text'
+					<textarea
 						placeholder='Ingresa la descripción de la categoría'
 						id='descripcion'
 						value={descripcion}
 						onChange={handleDescripcionChange}
 						required
-                        className={styles.descripcion}
+						className={styles.descripcion}
 					/>
 				</span>
 				<span className={styles.contCategoria}>
 					<div className={styles.fileInput}>
-						{/* <div className={styles.imagenes}>
-							{imagen.map((image, index) => (
-								<img
-									key={index}
-									src={image}
-									alt={`Imagen ${index}`}
-									width={150}
-									height={100}
-								/>
-							))}
-						</div> */}
+						<div className={styles.imagen}>
+							{imagen.length > 0 ? (
+								<p>{`${imagen.length} imagen${imagen.length !== 1 ? 'es' : ''} seleccionada${imagen.length !== 1 ? 's' : ''}`}</p>
+							) : (
+								<p>Ninguna imagen seleccionada</p>
+							)}
+						</div>
 						<label htmlFor='imagenes'>Subir imagen</label>
-						<input
-							type='file'
-							id='imagenes'
-							onChange={handleImagenChange}
-						/>
+						<input type='file' id='imagenes' onChange={handleImagenChange} />
 					</div>
 					<button className={styles.buttonSubmit} type='submit'>
 						Agregar

@@ -39,7 +39,7 @@
     align-items: center;
 }
 
-.usuarios button {
+.botonAgregar {
     background-color: var(--verdeClaro);
     color: var(--blanco);
     border: none;
@@ -51,12 +51,20 @@
     cursor: pointer;
 }
 
-.usuarios button:hover {
+.botonAgregar:hover {
     background-color: var(--verdeOscuro);
 }
 
 .botonQuitar {
     background-color: var(--verdeOscuro);
+    color: var(--blanco);
+    border: none;
+    padding: 15px 20px;
+    width: 70%;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 2px;
+    cursor: pointer;
 }
 
 .botonQuitar:hover {

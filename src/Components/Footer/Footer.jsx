@@ -9,6 +9,12 @@ const Footer = () => {
 				<img className={styles.isoLogoWidth} src={imagenes.isoLogoA1} />
 				<span className={styles.copyRigth}>©2024 Drive4Life</span>
 				<span className={styles.copyRigthPhone}>©2024 Drive4Life Booking</span>
+				
+			</div>
+			<div>
+				<Link to={'/politicas'}>
+						<p className={styles.politica}>Políticas de uso</p>
+				</Link>
 			</div>
 			{/*
 			<div className={styles.contIcons}>

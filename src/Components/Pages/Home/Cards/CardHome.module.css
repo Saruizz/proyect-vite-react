@@ -37,7 +37,6 @@
 .contLink {
     display: flex;
     width: 100%;
-    justify-content: center;
 }
 
 .btCard {
@@ -48,12 +47,13 @@
     text-decoration: none;
     border-radius: 5px;
     padding: 10px;
-    width: 100%;
+    width: 40%;
     background-color:var(--verdeClaro);
     border: none;
     box-shadow: 0 10px 8px -10px rgba(0, 0, 0, 0.8);
     cursor: pointer;
     font-weight: 550;
+    margin-left: 0%;
 }
 
 .btCard:hover {
@@ -86,5 +86,5 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
