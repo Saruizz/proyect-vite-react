@@ -54,6 +54,12 @@
     margin-left: 3rem;
 }
 
+/*Políticas*/
+
+.politica {
+    color: var(--blanco);
+    text-decoration: none;
+}
 
 /* @media query para pantallas más pequeñas */
 @media (max-width: 800px) {

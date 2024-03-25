@@ -4,38 +4,38 @@ import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 
 const CardHome = () => {
-	const imagenesUrls = [
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/01%20Renault%20Stepway-01.jpg?alt=media&token=1ec06e20-326f-4c8f-bce2-0d0856db7716',
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba',
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/06-Chevrolet%20Sonic-01.jpg?alt=media&token=5d979822-0c57-4055-9909-494acdd64fe8',
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/03%20Mazda%203-01.jpg?alt=media&token=3a0502c7-095c-4f81-9a9f-7fc41e5a91a1',
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/04%20Chevrolet%20Onix-01.jpg?alt=media&token=f2d5e5ca-db22-4b19-a52d-6145dc63facf',
-		'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/05%20Chevrolet%20Optra-01.jpg?alt=media&token=e65933ea-f4da-44ac-870f-ef099718baba',
-	];
 	const [carInfo, setCarInfo] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/comments').then(res => {
+		axios.get('http://localhost:8081/vehiculos/aleatorios').then(res => {
 			setCarInfo(res.data.slice(0, 6));
 		});
 	}, []);
 
+	//const handleCardClick = (id) => {
+	// Redirect to the vehicle's detail page using the id
+	// For example, using react-router-dom:
+	// <Link to={`/vehiculo/${id}`}>
+	//   <div className={styles.btCard}>Ver más</div>
+	// </Link>
+	//}
+
 	return (
 		<div className={styles.home}>
-			{carInfo.map((carInfo, index) => (
+			{carInfo.map(carInfo => (
 				<div className={styles.card}>
 					<span className={styles.datos}>
 						<img
 							className={styles.automovil}
-							src={imagenesUrls[index]}
+							src={carInfo.imagenes.length > 0 ? carInfo.imagenes[0].url : ''}
 							alt='automovil'
 						/>
 					</span>
 					<span className={styles.datos}>
-						<h2>{carInfo.name}</h2> {/*nombre*/}
+						<h2>{carInfo.nombre}</h2> {/*nombre*/}
 						<div>
 							<div>
-								<p className={styles.descripcion}>{carInfo.body}</p>{' '}
+								<p className={styles.descripcion}>{carInfo.descripcion}</p>{' '}
 								{/*descripcion*/}
 							</div>
 							<div className={styles.contLink}>

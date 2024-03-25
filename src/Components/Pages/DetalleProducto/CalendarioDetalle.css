@@ -1,0 +1,101 @@
+.calendario-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+.calendario-card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Estilos para el selector del año */
+.rdrYearPicker>select {
+    background-color: var(--blanco);
+    border: 1px solid var(--grisClaro);
+    border-radius: 5px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    color: var(--negro);
+}
+
+.rdrMonthPicker>select {
+    background-color: var(--blanco);
+    border: 1px solid var(--grisClaro);
+    border-radius: 5px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    text-transform: capitalize;
+    color: var(--negro);
+}
+
+.rdrMonthPicker>select:hover {
+    background-color: var(--verdeOscuro);
+    color: var(--blanco);
+}
+
+.rdrYearPicker>select:hover {
+    background-color: var(--verdeOscuro);
+    color: var(--blanco);
+}
+
+.rdrMonthName {
+    text-transform: capitalize;
+    color: var(--negro);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.rdrWeekDays>span {
+    text-transform: capitalize;
+    color: var(--negro);
+    font-weight: bold;
+}
+
+.rdrDayDisabled {
+    cursor: not-allowed;
+    /* Cambiar cursor al pasar sobre fechas deshabilitadas */
+    background-color: rgba(53, 57, 53, 0.164);
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+.rdrDayDisabled>span {
+    font-weight: bold;
+}
+
+.rdrMonthAndYearWrapper>button {
+    background-color: var(--verdeOscuro);
+}
+
+.rdrMonthAndYearWrapper>button:hover {
+    background-color: var(--blanco)
+}
+
+.contFechaOcu {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.contFechaOcu span {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grisClaro);
+    margin-right: 3px;
+    color: var(--grisClaro);
+
+}

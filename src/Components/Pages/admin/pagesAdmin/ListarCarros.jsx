@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { getToken } from '../../../token/tokenService';
 
 const CarList = () => {
     const [users, setUsers] = useState([]);
@@ -7,7 +8,7 @@ const CarList = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+                const response = await axios.get('http://localhost:8081/vehiculos/listar');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error al obtener la lista de carros:', error);
@@ -17,15 +18,33 @@ const CarList = () => {
         fetchUsers();
     }, []);
 
-    const handleDelete = (userId) => {
-        const confirmDelete = window.confirm('¿Está seguro de que desea eliminar la publicación?');
-        if (confirmDelete) {
-            //logica de eliminacion, esta en modo demo,  mientras se consume api
-            const updatedUsers = users.filter(user => user.id !== userId);
-            setUsers(updatedUsers);
-            console.log('Eliminar carro con id: ', userId);
-        }
-    };
+const handleDelete = (vehiculoId) => {
+    console.log(vehiculoId);
+    const token = getToken();
+    const confirmDelete = window.confirm('¿Está seguro de que desea eliminar el vehículo?');
+    if (confirmDelete) {
+        axios.delete(`http://localhost:8081/vehiculos/eliminar/${vehiculoId}`,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                // Verificar si la eliminación fue exitosa
+                if (response.status === 200) {
+                    // Eliminar el vehículo de la lista de vehículos (actualiza el estado)
+                    const updatedVehicles = vehicles.filter(vehicle => vehicle.id !== vehiculoId);
+                    setVehicles(updatedVehicles);
+                    console.log(`Vehículo con id ${vehiculoId} eliminado exitosamente.`);
+                } else {
+                    console.error('Error al eliminar el vehículo:', response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar el vehículo:', error);
+            });
+    }
+};
+
 
     const carImages = [
         'https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/01%20Renault%20Stepway-01.jpg?alt=media&token=1ec06e20-326f-4c8f-bce2-0d0856db7716',

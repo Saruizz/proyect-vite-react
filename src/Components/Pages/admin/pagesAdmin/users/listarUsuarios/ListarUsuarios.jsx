@@ -7,7 +7,7 @@ const ListarUsuarios = () => {
 
 	useEffect(() => {
 		try {
-			axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
+			axios.get('http://localhost:8081/usuarios').then(res => {
 				const usuariosConPermiso = res.data.map(user => ({...user, permiso: 'Ninguno'}));
 				setUsers(usuariosConPermiso);
 			});
@@ -19,7 +19,7 @@ const ListarUsuarios = () => {
 	
 	const handleAgregar = (userId) => { 
 
-		axios.patch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+		axios.patch(`http://localhost:8081/usuarios${userId}`, {
 			permiso: 'Administrador'
 		}).then(() => {
 			// Actualizar el estado local 
@@ -37,7 +37,7 @@ const ListarUsuarios = () => {
 
 	const handleQuitar = (userId) => {
 
-		axios.patch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+		axios.patch(`http://localhost:8081/usuarios${userId}`, {
 			permiso: 'Ninguno'
 		}).then(() => {
 			setUsers(prevUsers =>
@@ -73,7 +73,7 @@ const ListarUsuarios = () => {
 								<td>{user.email}</td>
 								<td>{user.permiso}</td>
 								<td className={styles.permiso}>
-									<button
+									<button className = {styles.botonAgregar} 
 									onClick={() => handleAgregar(user.id)}>
 										Añadir permisos
 									</button>

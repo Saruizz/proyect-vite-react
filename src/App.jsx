@@ -13,7 +13,8 @@ import ListarCarros from './Components/Pages/admin/pagesAdmin/ListarCarros.jsx';
 import ListarUsuarios from './Components/Pages/admin/pagesAdmin/users/listarUsuarios/ListarUsuarios.jsx';
 import AgregarCategoria from './Components/Pages/admin/pagesAdmin/categorias/AgregarCategoria.jsx';
 import Perfil from './Components/Pages/admin/pagesAdmin/users/perfil/Perfil.jsx';
-import IniciarSesion from './Components/Pages/admin/pagesAdmin/users/iniciarSeccion/IniciarSesion.jsx';
+import IniciarSesion from './Components/Pages/admin/pagesAdmin/users/iniciarSesion/IniciarSesion.jsx';
+import Politicas from './Components/Pages/politicas/Politicas.jsx';
 
 const App = () => {
 	return (
@@ -31,6 +32,7 @@ const App = () => {
 				<Route path='/agregarCategoria' element={<AgregarCategoria />} />
 				<Route path='/perfil' element={<Perfil />} />
 				<Route path='/iniciarSesion' element={<IniciarSesion />} />
+				<Route path='/politicas' element={<Politicas/>} />
 			</Routes>
 			<Footer />
 		</>

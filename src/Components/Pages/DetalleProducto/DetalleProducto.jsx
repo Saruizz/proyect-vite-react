@@ -1,45 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Detalle.module.css';
 import img from '../../../assets/img';
-import { Calendar } from 'react-calendar'; // Importar librería de calendario
-import format from 'date-fns/format';
+import CalendarioDetalle from './CalendarioDetalle';
 
 const DetalleProducto = () => {
 	// Extract the product ID from the URL parameters
 	const { id } = useParams();
 
 	// Initialize state variables for product details
-	const [producto, setProducto] = useState({});
+	const [vehiculo, setVehiculo] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
-	const [disponibilidad, setDisponibilidad] = useState([]); // Estado para almacenar la disponibilidad
-	const [isLoadingDisponibilidad, setIsLoadingDisponibilidad] = useState(true); // Estado para indicar si se está cargando la disponibilidad
-	const [selectedDate, setSelectedDate] = useState(null); // Estado para almacenar la fecha seleccionada
 
 	// Fetch product details using the product ID and set the state
 	useEffect(() => {
 		axios
-			.get(`https://jsonplaceholder.typicode.com/comments/${id}`)
-			.then(response => {
-				setProducto(response.data);
+			.get(`http://localhost:8081/vehiculos/${id}`)
+			.then(res => {
+				setVehiculo(res.data);
 				setIsLoading(false);
 			})
 			.catch(error => {
 				console.error(error);
 				setIsLoading(false);
-			});
-		axios
-			.get(`https://api-placeholder.com/disponibilidad/${id}`) // URL de ejemplo para obtener la disponibilidad
-			.then(response => {
-				setDisponibilidad(response.data);
-				setIsLoadingDisponibilidad(false);
-			})
-			.catch(error => {
-				console.error(error);
-				setIsLoadingDisponibilidad(false);
 			});
 	}, [id]);
 
@@ -50,7 +35,8 @@ const DetalleProducto = () => {
 			) : (
 				<>
 					<div className={styles.contNombreCarro}>
-						<h2>{producto.nombre}</h2>
+						<h2>Kia Picanto</h2>
+
 						<Link>
 							<img src={img.volver} />
 						</Link>
@@ -84,39 +70,30 @@ const DetalleProducto = () => {
 						<button className={styles.btnVerMas}>Ver más</button>
 					</div>
 					<div className={styles.contDescripcion}>
-						<span>{producto.descripcion}</span>
+						<span>
+							Con 2 impresionantes piscinas, una en la terraza y otra al aire
+							libre; habitaciones privadas alguEn el corazón de San Telmo,
+							disfruta de un albergue inspirado en las pasiones de Buenos Aires.
+							Con 2 impresionantes piscinas, una en la terraza y otra al aire
+							libre; habitaciones privadas alguEn el corazón de San Telmo,
+							disfruta de un albergue inspirado en las pasiones de Buenos Aires.
+							Con 2 impresionantes piscinas, una en la terraza y otra al aire
+							libre; habitaciones privadas lguEn el corazón de San Telmo,
+							disfruta de un albergue inspirado en las pasiones de Buenos Aires.
+						</span>
 					</div>
-
-					{isLoadingDisponibilidad ? (
-						<div className={styles.loading}>Cargando disponibilidad...</div>
-					) : (
-						<>
-							{/* ... Código existente para mostrar el nombre del producto ... */}
-
-							<div className={styles.contCalendario}>
-								<h2>Disponibilidad</h2>
-								<Calendar
-									locale='es'
-									defaultDate={new Date()}
-									tileClassName={({ date, className }) => {
-										// Marcar las fechas ocupadas con un color diferente
-										const fechaFormateada = format(date, 'dd/MM/yyyy'); // Formatea la fecha
-
-										if (
-											disponibilidad.some(fecha => fecha === fechaFormateada)
-										) {
-											className += ` ${styles.fechaOcupada}`;
-										}
-
-										return className;
-									}}
-									onSelect={date => setSelectedDate(date)}
-								/>
-							</div>
-
-							{/* ... Código existente para mostrar el resto del detalle del producto ... */}
-						</>
-					)}
+					<div className={styles.contCaracteristicas}>
+						<div>
+							<h3>Características</h3>
+						</div>
+					</div>
+					<div className={styles.contCalendario}>
+						<div className={styles.contImgCal}>
+							<img src={img.calendario} />
+							<h3>Disponibilidad</h3>
+						</div>
+						<CalendarioDetalle />
+					</div>
 				</>
 			)}
 		</div>

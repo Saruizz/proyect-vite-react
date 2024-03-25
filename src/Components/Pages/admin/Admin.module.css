@@ -8,7 +8,7 @@
 .dash {
     display: flex;
     font-family: "Poppins" ;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .btDash {
@@ -17,28 +17,25 @@
     font-size: 16px;
     font-weight: bold;
     padding: 20px;
-    width: 98%;
+    width: 20vw;
     background-color: var(--verdeClaro);
     border: none;
-    margin: 5px;
+    margin: 10px;
     cursor: pointer;
 }
 
 .admin h1 {
     color: var(--verdeOscuro);
-    font-size: 24px;
-    margin-left: 10vw;
-}
-
-.admin h2 {
-    color: var(--verdeClaro);
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
 }
 
 .contenedor {
+    width: vw;
+    margin: 5%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .categoria {
@@ -47,4 +44,17 @@
 
 .usuario {
     background-color: var(--grisAzulado);
+    margin-left: 11vw;
+}
+
+.funciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
 }

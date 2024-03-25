@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './AgregarProducto.module.css';
 import img from '../../../../../assets/img';
+import Swal from 'sweetalert2';
+import { getToken } from '../../../../token/tokenService';
 
-//Se realiza form para agregar producto
 const AgregarProducto = () => {
 	const [info, setInfo] = useState('');
 	const [nombre, setNombre] = useState('');
 	const [descripcion, setDescripcion] = useState('');
 	const [imagenes, setImagenes] = useState([]);
+	const [selectedOption, setSelectedOption] = useState('');
 	const [error, setError] = useState('');
 
 	useEffect(() => {
-		axios.get('https://jsonplaceholder.typicode.com/comments').then(res => {
+		axios.get('http://localhost:8081/vehiculos/listar').then(res => {
 			setInfo(res.data);
 		});
 	}, []);
@@ -27,52 +29,65 @@ const AgregarProducto = () => {
 	};
 
 	const handleImagenesChange = e => {
-		const files = e.target.files;
-		const filesArray = Array.from(files);
-
-		Promise.all(
-			filesArray.map(file => {
-				return new Promise((resolve, reject) => {
-					const reader = new FileReader();
-					reader.onload = () => resolve(reader.result);
-					reader.onerror = reject;
-					reader.readAsDataURL(file);
-				});
-			}),
-		)
-			.then(images => {
-				setImagenes(prevImagenes => [...prevImagenes, ...images]);
-			})
-			.catch(error => console.error('Error al leer los archivos: ', error));
+		setImagenes(e.target.value);
 	};
 
-	const handleSubmit = e => {
+	const handleChange = event => {
+		setSelectedOption(event.target.value);
+	};
+
+	const handleSubmit = async e => {
 		e.preventDefault();
 
-		const nombreExistente = info.find(item => item.name === nombre);
-		if (nombreExistente) {
-			setError('El nombre ya esta en uso');
+		// Validar que el nombre no esté vacío
+		if (!nombre.trim()) {
+			setError('El nombre del producto es obligatorio');
 			return;
 		}
 
-		axios
-			.post('https://jsonplaceholder.typicode.com/posts', {
-				nombre,
-				descripcion,
-				imagenes,
-			})
-			.then(() => {
-				alert('Carro agregado exitosamente');
-				setNombre('');
-				setDescripcion('');
-				setImagenes([]);
-			})
-			.catch(error => console.log('Error al agregar producto: ', error));
+		// Validar que el nombre del producto no exista
+		const nombreExistente = info.find(item => item.nombre === nombre);
+		if (nombreExistente) {
+			setError('El nombre del producto ya está en uso');
+			return;
+		}
 
-		if (imagenes.length > 0) {
-			console.log('Imagénes seleccionadas: ', imagenes);
-		} else {
-			console.log('Ninguna imagen seleccionada');
+		try {
+			const playload = {
+				nombre: nombre,
+				descripcion: descripcion,
+				imagenes: [
+					{
+						nombre: nombre,
+						url: imagenes,
+					},
+				],
+				categoria: { id: parseInt(selectedOption) },
+			};
+
+			const token = getToken();
+
+			const response = await fetch('http://localhost:8081/vehiculos/agregar', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(playload),
+			});
+
+			if (!response.ok) {
+				throw new Error('Error al agregar producto');
+			}
+
+			// Manejar la respuesta exitosa
+			Swal.fire('¡Producto agregado exitosamente!', '', 'success');
+			setNombre('');
+			setDescripcion('');
+			setSelectedOption('');
+		} catch (error) {
+			// Manejar el error
+			Swal.fire('Error al agregar producto', error.message, 'error');
 		}
 	};
 
@@ -94,10 +109,19 @@ const AgregarProducto = () => {
 						onChange={handleNombreChange}
 						required
 					/>
+					<label>Categoria</label>
+					<select
+						className={styles.selcategorias}
+						value={selectedOption}
+						onChange={handleChange}
+					>
+						<option value=''>Selecciona una categoría</option>
+						<option value='1'>Automóvil</option>
+						<option value='2'>SUV</option>
+						<option value='3'>VAN</option>
+					</select>
 					<label>Descripción</label>
-					//contenedor de categorias
-					<input
-						type='text'
+					<textarea
 						placeholder='Ingresa la descripción del producto'
 						id='descripcion'
 						value={descripcion}
@@ -108,23 +132,12 @@ const AgregarProducto = () => {
 				</span>
 				<span className={styles.contenedor}>
 					<div className={styles.fileInput}>
-						{/* <div className={styles.imagenes}>
-							{imagenes.map((image, index) => (
-								<img
-									key={index}
-									src={image}
-									alt={`Imagen ${index}`}
-									width={150}
-									height={100}
-								/>
-							))}
-						</div> */}
-						<label htmlFor='imagenes'>Subir imagenes</label>
+						<label htmlFor='imagenes'>Subir imágenes</label>
 						<input
-							type='file'
+							type='text'
 							id='imagenes'
 							onChange={handleImagenesChange}
-							multiple
+							required
 						/>
 					</div>
 					<button className={styles.btSubmit} type='submit'>
