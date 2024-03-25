@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from '../src/AuthContext'; // Importa el AuthProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<BrowserRouter>
-		<App />
+		<AuthProvider> {/* Envuelve App con AuthProvider */}
+            <App />
+        </AuthProvider>
 	</BrowserRouter>,
 );
