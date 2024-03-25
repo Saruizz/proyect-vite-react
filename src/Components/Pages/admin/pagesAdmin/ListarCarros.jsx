@@ -19,7 +19,7 @@ const CarList = () => {
     }, []);
 
 const handleDelete = (vehiculoId) => {
-    console.log(vehiculoId);
+    //console.log(vehiculoId);
     const token = getToken();
     const confirmDelete = window.confirm('¿Está seguro de que desea eliminar el vehículo?');
     if (confirmDelete) {

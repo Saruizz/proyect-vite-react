@@ -4,13 +4,15 @@ import { setToken } from '../../../../../token/tokenService'; //Importa el servi
 import axios from 'axios';
 import styles from './IniciarSesion.module.css';
 import img from '../../../../../../assets/img';
+import { useAuth } from '../../../../../../AuthContext';
 
 function IniciarSesion() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate(); // Hook para manejar la navegación
-
+    const { login } = useAuth();
+    
     const handleSubmit = async e => {
         e.preventDefault();
 
@@ -23,7 +25,7 @@ function IniciarSesion() {
             const token = response.data.token; // Suponiendo que el backend devuelve un objeto con el token
             setToken(token); // Almacena el token en localStorage
 
-
+            login();
             // Redirigir al usuario a la página de perfil u otra página después de iniciar sesión
             navigate('/perfil');
         } catch (error) {
