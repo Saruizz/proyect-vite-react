@@ -1,6 +1,8 @@
 import styles from './CrearCuenta.module.css';
 import img from '../../../../../../assets/img';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const CrearCuenta = () => {
 	const [nombre, setNombre] = useState('');
@@ -57,11 +59,16 @@ const CrearCuenta = () => {
 			.then(response => {
 				console.log('Formulario enviado correctamente');
 				console.log(response.data);
+				Swal.fire('¡Producto agregado exitosamente!', '', 'success');
+				setNombre('');
+				setApellido('');
+				setCorreoElectronico('');
+				setContraseña('');
+				setConfirmarContraseña('');
 			})
 			.catch(error => {
 				console.error('Error al enviar el formulario', error);
 			});
-		console.log('Formulario enviado');
 	};
 
 	return (
