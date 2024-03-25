@@ -39,7 +39,9 @@ const CardHome = () => {
 								{/*descripcion*/}
 							</div>
 							<div className={styles.contLink}>
-								<Link className={styles.btCard}>Ver más</Link>
+								<Link to={`/detalle/${carInfo.id}`} className={styles.btCard}>
+									Ver más
+								</Link>
 							</div>
 						</div>
 					</span>

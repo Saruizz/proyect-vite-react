@@ -95,6 +95,7 @@ const AgregarProducto = () => {
 						required
 					/>
 					<label>Descripción</label>
+					//contenedor de categorias
 					<input
 						type='text'
 						placeholder='Ingresa la descripción del producto'
