@@ -185,10 +185,6 @@ const CalendarioDetalle = () => {
 					minDate={new Date()}
 				/>
 			</div>
-			<div className='contFechaOcu'>
-				<span>.</span>
-				<h3>Fechas ocupadas</h3>
-			</div>
 		</div>
 	);
 };

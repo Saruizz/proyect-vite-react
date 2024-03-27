@@ -37,6 +37,7 @@
 
 .contFotos {
     display: flex;
+    max-width: 100%;
 }
 
 .contFotoPrincipal {
@@ -50,15 +51,15 @@
 
 .contFotoPrincipal img {
     max-width: 100%;
-    width: 100%;
     margin: -30px 0px -30px 0px;
 }
 
 .contFotosSeg {
     display: flex;
-    width: 50%;
+    max-width: 50%;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .fotosSeg {
@@ -91,6 +92,9 @@
     padding: 1.5rem 5rem;
     background-color: var(--blanco);
     border-radius: 0 0 10px 12px;
+    @media screen and (max-width: 700px) {
+            justify-content: center;
+        }
 }
 
 .btnVerMas {    
@@ -142,6 +146,11 @@
     justify-content: space-between;
     padding: 2rem 5rem 2rem 15rem;
     background-color: var(--verdeOscuro);
+    @media screen and (max-width: 1250px) {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 5rem 2rem 5rem;
+    }
 }
 
 .contImgCal {
@@ -156,5 +165,9 @@
 }
 
 .contCalendario img {
+    display: flex;
     width: 10rem;
+    @media screen and (max-width: 1250px) {
+        width: 6rem;
+    }
 }

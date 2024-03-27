@@ -110,7 +110,10 @@ const DetalleProducto = () => {
 						</div>
 					</div>
 					<div className={styles.contCalendario}>
-						<img src={img.calendario} />
+						<div className={styles.contImgCal}>
+							<img src={img.calendario} />
+							<h3>Disponibilidad</h3>
+						</div>
 						<CalendarioDetalle />
 					</div>
 				</>
