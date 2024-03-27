@@ -101,6 +101,9 @@ import 'react-date-range/dist/theme/default.css';
 import './CalendarioDetalle.css';
 import es from 'date-fns/locale/es';
 
+//vehiculos/fechasocupadas/{id}
+//vehiculo 2
+
 const CalendarioDetalle = () => {
 	const [fechasOcupadas, setFechasOcupadas] = useState([]);
 
