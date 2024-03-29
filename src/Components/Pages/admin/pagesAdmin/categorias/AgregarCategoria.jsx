@@ -3,18 +3,13 @@ import axios from 'axios';
 import styles from './AgregarCategoria.module.css';
 import img from '../../../../../assets/img';
 import Swal from 'sweetalert2';
+import { getToken } from '../../../../token/tokenService';
 
 const AgregarCategoria = () => {
-	const [categoria, setCategoria] = useState('');
 	const [titulo, setTitulo] = useState('');
 	const [descripcion, setDescripcion] = useState('');
-	const [imagen, setImagen] = useState([]);
+	const [imagen, setImagen] = useState('');
 
-	useEffect(() => {
-		axios.get('http://localhost:8081/categorias/').then(res => {
-			setCategoria(res.data);
-		});
-	}, []);
 
 	const handleTituloChange = e => {
 		setTitulo(e.target.value);
@@ -25,55 +20,43 @@ const AgregarCategoria = () => {
 	};
 
 	const handleImagenChange = e => {
-		const files = e.target.files;
-		const filesArray = Array.from(files);
-
-		Promise.all(
-			filesArray.map(file => {
-				return new Promise((resolve, reject) => {
-					const reader = new FileReader();
-					reader.onload = () => resolve(reader.result);
-					reader.onerror = reject;
-					reader.readAsDataURL(file);
-				});
-			}),
-		)
-			.then(images => {
-				setImagen(prevImagenes => [...prevImagenes, ...images]);
-			})
-			.catch(error => console.error('Error al leer los archivos: ', error));
+		setImagen(e.target.value)
 	};
 
-	const handleSubmit = e => {
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		axios
-			.post('http://localhost:8081/categorias', {
-				titulo,
-				descripcion,
-				imagen,
-			})
-			.then(() => {
-				Swal.fire({
-					title: "¡Categoría agregada exitosamente!",
-					icon: "success",
-					confirmButtonText: 'Aceptar',
-					customClass: {
-					  confirmButton: styles.botonCategoria,
-					},
-					buttonsStyling: false,
-				  });
-				setTitulo('');
-				setDescripcion('');
-				setImagen([]);
-			})
-			.catch(error => console.log('Error al agregar categoría: ', error));
-
-		if (imagen.length > 0) {
-			console.log('Imagénes seleccionadas: ', imagen);
-		} else {
-			console.log('Ninguna imagen seleccionada');
-		}
+		try {
+			const playload = {
+			  titulo: titulo,
+			  descripcion: descripcion,
+			  urlImagen :imagen
+			};
+		
+			const token = getToken();
+		
+			const response = await fetch('http://localhost:8081/categorias/agregar', {
+			  method: 'POST',
+			  headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			  },
+			  body: JSON.stringify(playload)
+			});
+		
+			if (!response.ok) {
+			  throw new Error('Error al agregar categoria');
+			}
+		
+			// Manejar la respuesta exitosa
+			Swal.fire("¡Categoria agregada exitosamente!", "", "success");
+			setTitulo('');
+			setDescripcion('');
+		  } catch (error) {
+			// Manejar el error
+			Swal.fire("Error al agregar categoria", error.message, "error");
+		  }
 	};
 
 	return (
@@ -105,15 +88,12 @@ const AgregarCategoria = () => {
 				</span>
 				<span className={styles.contCategoria}>
 					<div className={styles.fileInput}>
-						<div className={styles.imagen}>
-							{imagen.length > 0 ? (
-								<p>{`${imagen.length} imagen${imagen.length !== 1 ? 'es' : ''} seleccionada${imagen.length !== 1 ? 's' : ''}`}</p>
-							) : (
-								<p>Ninguna imagen seleccionada</p>
-							)}
-						</div>
 						<label htmlFor='imagenes'>Subir imagen</label>
-						<input type='file' id='imagenes' onChange={handleImagenChange} />
+						<input 
+						type='text' 
+						id='imagen' 
+						onChange={handleImagenChange}
+						required />
 					</div>
 					<button className={styles.buttonSubmit} type='submit'>
 						Agregar

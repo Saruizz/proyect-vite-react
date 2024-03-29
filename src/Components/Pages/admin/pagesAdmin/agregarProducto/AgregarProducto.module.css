@@ -72,6 +72,14 @@
     box-shadow: 0 0 0.5px var(--grisClaro);
 }
 
+.selcategorias {
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Poppins";
+    border: 2px solid var(--grisClaro);
+    box-shadow: 0 0 0.5px var(--grisClaro);}
+
 .fileInput input[type='file'] {
     display: none;
 }

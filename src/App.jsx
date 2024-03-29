@@ -23,7 +23,7 @@ const App = () => {
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='*' element={<Notfound />} />
-				<Route path='/detalle' element={<DetalleProducto />} />
+				<Route path='/detalle/:id' element={<DetalleProducto />} />
 				<Route path='/crearCuenta' element={<CrearCuenta />} />
 				<Route path='/administracion' element={<Admin />} />
 				<Route path='/agregarProducto' element={<AgregarProducto />} />
@@ -32,7 +32,7 @@ const App = () => {
 				<Route path='/agregarCategoria' element={<AgregarCategoria />} />
 				<Route path='/perfil' element={<Perfil />} />
 				<Route path='/iniciarSesion' element={<IniciarSesion />} />
-				<Route path='/politicas' element={<Politicas/>} />
+				<Route path='/politicas' element={<Politicas />} />
 			</Routes>
 			<Footer />
 		</>

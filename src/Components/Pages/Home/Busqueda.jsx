@@ -4,11 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import format from 'date-fns/format';
 import { addDays } from 'date-fns';
-
+import es from 'date-fns/locale/es';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import axios from 'axios';
 
 const FormularioBusqueda = () => {
+	const [vehiculos, setVehiculos] = useState([]);
+	const [busqueda, setBusqueda] = useState('');
 	const [open, setOpen] = useState(false);
 	const refOne = useRef(null);
 	const [placeholderText, setPlaceholderText] = useState(
@@ -27,7 +30,14 @@ const FormularioBusqueda = () => {
 		{ id: 'Suv', label: 'SUV' },
 		{ id: 'Van', label: 'Van' },
 	]);
+
 	const [modalOpen, setModalOpen] = useState(false);
+
+	useEffect(() => {
+		axios.get('http://localhost:8081/vehiculos/busqueda').then(res => {
+			setBusqueda(res.data);
+		});
+	}, []);
 
 	const handleRangeChange = newRange => {
 		setRange([newRange.selection]);
@@ -45,6 +55,20 @@ const FormularioBusqueda = () => {
 				opcion.id === id ? { ...opcion, checked: !opcion.checked } : opcion,
 			),
 		);
+	};
+
+	const handleBusquedaChange = e => {
+		setBusqueda(e.target.value);
+	};
+
+	const handleSubmit = () => {
+		// Enviar la búsqueda al backend
+		fetch(`/busqueda?consulta=${consulta}`).then(response => {
+			// Mostrar los datos filtrados
+			const vehiculos = response.json();
+			// Actualizar el estado de React con los datos filtrados
+			setVehiculos(vehiculos);
+		});
 	};
 
 	return (
@@ -68,8 +92,12 @@ const FormularioBusqueda = () => {
 						>
 							Categoría
 						</button>
-
-						<input type='text' placeholder='Ej: Kia Picanto' />
+						<input
+							type='text'
+							placeholder='Ej: Kia Picanto'
+							value={busqueda}
+							onChange={handleBusquedaChange}
+						/>
 						<input
 							value={placeholderText}
 							readOnly
@@ -99,7 +127,18 @@ const FormularioBusqueda = () => {
 							)}
 						</div>
 					</div>
-					<button className={styles.btBusqueda}>Realizar búsqueda</button>
+					<button
+						className={styles.btBusqueda}
+						type='submit'
+						onClick={handleSubmit}
+					>
+						Realizar búsqueda
+					</button>
+					<ul>
+						{vehiculos.map(vehiculo => (
+							<li key={vehiculo.id}>{vehiculo.nombre}</li>
+						))}
+					</ul>
 				</form>
 			</div>
 			<img src={img.isoLogoC2} />
