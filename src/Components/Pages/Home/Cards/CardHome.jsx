@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 
-const CardHome = () => {
+const CardHome = ({ id }) => {
 	const [carInfo, setCarInfo] = useState([]);
 
 	useEffect(() => {
@@ -12,13 +12,13 @@ const CardHome = () => {
 		});
 	}, []);
 
-	//const handleCardClick = (id) => {
-	// Redirect to the vehicle's detail page using the id
-	// For example, using react-router-dom:
-	// <Link to={`/vehiculo/${id}`}>
-	//   <div className={styles.btCard}>Ver más</div>
-	// </Link>
-	//}
+	const handleCardClick = id => {
+		// Redirect to the vehicle's detail page using the id
+		// For example, using react-router-dom:
+		<Link to={`/vehiculo/${id}`}>
+			<div className={styles.btCard}>Ver más</div>
+		</Link>;
+	};
 
 	return (
 		<div className={styles.home}>
@@ -38,10 +38,19 @@ const CardHome = () => {
 								<p className={styles.descripcion}>{carInfo.descripcion}</p>{' '}
 								{/*descripcion*/}
 							</div>
-							<div className={styles.contLink}>
-								<Link to={`/detalle/${carInfo.id}`} className={styles.btCard}>
-									Ver más
-								</Link>
+							<div className={styles.botones}>
+								<div className={styles.contLink}>
+									<Link className={styles.btCard}>Reservar</Link>
+								</div>
+								<div className={styles.contLink}>
+									<Link
+										to={`/detalle/${carInfo.id}`}
+										className={styles.btCard}
+										onClick={handleCardClick}
+									>
+										Ver más
+									</Link>
+								</div>
 							</div>
 						</div>
 					</span>

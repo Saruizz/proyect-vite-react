@@ -20,9 +20,17 @@ const CrearCuenta = () => {
 		contraseña: /^.{8,20}$/, // Al menos 8 caracteres
 	};
 
-	const handleSubmit = e => {
+	const isEmailExistent = async email => {
+		const response = await axios.get(
+			'http://localhost:8081/usuarios/email/' + email,
+		);
+		return response.data.exists;
+	};
+
+	async function handleSubmit(e) {
 		e.preventDefault();
 		const erroresValidacion = [];
+
 		if (!expresiones.nombre.test(nombre)) {
 			erroresValidacion.push('El nombre no es válido');
 		}
@@ -44,6 +52,25 @@ const CrearCuenta = () => {
 		if (erroresValidacion.length > 0) {
 			setErrores(erroresValidacion);
 			return;
+		}
+
+		//ERRORES DE VALIDACION - EMAIL REPETIDO:
+		if (!expresiones.correoElectronico.test(correoElectronico)) {
+			erroresValidacion.push('El correo electrónico no es válido');
+		} else {
+			const emailExistent = await isEmailExistent(correoElectronico);
+			if (emailExistent) {
+				erroresValidacion.push('El correo electrónico ya está registrado');
+			}
+		}
+
+		if (erroresValidacion.length > 0) {
+			setErrores(erroresValidacion);
+			Swal.fire({
+				icon: 'error',
+				title: 'Error al registrarse',
+				text: erroresValidacion.join('\n'),
+			});
 		}
 
 		// Aquí se enviaría la información del formulario al servidor
@@ -69,7 +96,7 @@ const CrearCuenta = () => {
 			.catch(error => {
 				console.error('Error al enviar el formulario', error);
 			});
-	};
+	}
 
 	return (
 		<div className={styles.appCrearUsuario}>

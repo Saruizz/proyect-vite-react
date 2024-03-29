@@ -21,7 +21,7 @@ const Categorias = () => {
 					</Link>
 					<Link to={'/'} className={styles.linkCategorias}>
 						<div className={styles.contLinkImg}>
-							<img src='https://firebasestorage.googleapis.com/v0/b/proyectofdhg1.appspot.com/o/autos%2Fcategorias%2FCategoria%2003-VAN.png?alt=media&token=ca363769-cfb6-4e99-9a9f-e57ac5c14e9b' />
+							<img src='https://firebasestorage.googleapis.com/v0/b/proyectofdhg1.appspot.com/o/autos3%2F27%20Mercedes%20Benz%20Sprinter-01.png?alt=media&token=417c7d74-b3a4-4b25-a6ce-12f5f8b297c4' />
 						</div>
 						<h3>Van</h3>
 					</Link>
