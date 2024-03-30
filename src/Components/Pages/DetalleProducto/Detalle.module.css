@@ -2,7 +2,6 @@
 .appDetalle {
     width: 100vw;
     min-height: 84.1vh;
-    padding-top: 83.03px;
     background-color: var(--blanco);
     @media screen and (max-width: 1200px) {
         padding-top: 66.09px;
@@ -12,6 +11,10 @@
     }
 }
 
+
+.imgVover {
+    cursor: pointer;
+}
 
 /* FOTOS */
 .contNombreCarro {
@@ -33,32 +36,54 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 3rem 0;
 }
 
 .contFotos {
     display: flex;
     max-width: 100%;
+    align-items: center;
+    @media screen and (max-width: 930px) {
+        flex-direction: column;
+    }
 }
 
 .contFotoPrincipal {
     display: flex;
-    height: 25rem;
+    justify-content: center;
+    align-items: center;
+    width: 35rem;
     overflow: hidden;
-    border-radius: 10px;
-    margin-right: 0.5rem;
-    background-color: transparent;
+    margin: 0.25rem;
+    background-color: var(transparent);
+    border-radius: 7px;
+    @media screen and (max-width: 700px) {
+        width: 25rem;
+    }
+    @media screen and (max-width: 460px) {
+        width: 15rem;
+    }
 }
 
 .contFotoPrincipal img {
     max-width: 100%;
-    margin: -30px 0px -30px 0px;
+    border-radius: 7px;
 }
 
 .contFotosSeg {
     display: flex;
-    max-width: 50%;
+    width: 35rem;
     flex-direction: column;
     justify-content: center;
+    @media screen and (max-width: 1250px) {
+        width: 25rem;
+    }
+    @media screen and (max-width: 700px) {
+        width: 20rem;
+    }
+    @media screen and (max-width: 460px) {
+        width: 13rem;
+    }
     
 }
 
@@ -72,18 +97,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
     width: 15rem;
     overflow: hidden;
     margin: 0.25rem;
-    background-color: var(--blanco);
+    background-color: transparent;
     border-radius: 7px;
 }
 
-.fotosSeg img {
+.fotosSegIndividual img {
     max-width: 100%;
-    width: 80%;
-    margin: -20px 0px -25px 0px;
+    border-radius: 7px;
+    margin-top: -15px;
+    margin-bottom: -15px;
 }
 
 .contBtn {

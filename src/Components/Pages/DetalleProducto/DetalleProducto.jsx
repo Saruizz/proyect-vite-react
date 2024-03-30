@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Detalle.module.css';
@@ -9,6 +9,7 @@ import CalendarioDetalle from './CalendarioDetalle';
 const DetalleProducto = () => {
 	const [car, setCar] = useState({ imagenes: [] });
 	const { id } = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios.get(`http://localhost:8081/vehiculos/${id}`).then(res => {
@@ -16,53 +17,50 @@ const DetalleProducto = () => {
 		});
 	}, [id]);
 
+	const handleGoBack = () => {
+		navigate(-1);
+	};
+
 	return (
 		<div className={styles.appDetalle}>
+			{/*car.imagenes.map((imagen, index) => (
+				<img key={index} src={imagen.url} alt={`Imagen ${index + 1}`} />
+			))*/}
 			<div className={styles.contNombreCarro}>
 				<h2>{car.nombre}</h2>
-				<Link>
-					<img src={img.volver} />
-				</Link>
+				<img
+					className={styles.imgVover}
+					src={img.volver}
+					alt='Volver'
+					onClick={handleGoBack}
+				/>
 			</div>
 			<div className={styles.contFotosGeneral}>
 				<div className={styles.contFotos}>
-					{car.imagenes.map((imagen, index) => (
-						<img key={index} src={imagen.url} alt={`Imagen ${index + 1}`} />
-					))}
-					{/* <div className={styles.contFotoPrincipal}>
-						<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
+					<div className={styles.contFotoPrincipal}>
+						<img src={car.imagenes.length > 0 ? car.imagenes[0].url : ''} />
 					</div>
-					<div className={styles.contFotosGeneral}>
-						<div className={styles.contFotos}>
-							<div className={styles.contFotoPrincipal}>
-								<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
+					<div className={styles.contFotosSeg}>
+						<div className={styles.fotosSeg}>
+							<div className={styles.fotosSegIndividual}>
+								<img src={car.imagenes.length > 0 ? car.imagenes[1].url : ''} />
 							</div>
-							<div className={styles.contFotosSeg}>
-								<div className={styles.fotosSeg}>
-									<div className={styles.fotosSegIndividual}>
-										<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
-									</div>
-									<div className={styles.fotosSegIndividual}>
-										<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
-									</div>
-								</div>
-								<div className={styles.fotosSeg}>
-									<div className={styles.fotosSegIndividual}>
-										<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
-									</div>
-									<div className={styles.fotosSegIndividual}>
-										<img src='https://firebasestorage.googleapis.com/v0/b/fotos-14e55.appspot.com/o/02%20Mazda%202-01.jpg?alt=media&token=57d20980-364d-4dc8-884c-776c9daf10ba' />
-									</div>
-								</div>
+							<div className={styles.fotosSegIndividual}>
+								<img src={car.imagenes.length > 0 ? car.imagenes[2].url : ''} />
+							</div>
+						</div>
+						<div className={styles.fotosSeg}>
+							<div className={styles.fotosSegIndividual}>
+								<img src={car.imagenes.length > 0 ? car.imagenes[3].url : ''} />
+							</div>
+							<div className={styles.fotosSegIndividual}>
+								<img src={car.imagenes.length > 0 ? car.imagenes[4].url : ''} />
 							</div>
 						</div>
 					</div>
-					<div className={styles.contBtn}>
-						<button className={styles.btnVerMas}>Ver más</button>
-					</div>
-					 */}
 				</div>
 			</div>
+
 			<div className={styles.contBtn}>
 				<button className={styles.btnVerMas}>Ver más</button>
 			</div>
