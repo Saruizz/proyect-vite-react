@@ -37,6 +37,9 @@
     justify-content: center;
     align-items: center;
     padding: 3rem 0;
+    @media screen and (max-width: 930px) {
+        padding-bottom: 0;
+    }
 }
 
 .contFotos {
@@ -76,6 +79,7 @@
     flex-direction: column;
     justify-content: center;
     @media screen and (max-width: 1250px) {
+        margin: 1.5rem;
         width: 25rem;
     }
     @media screen and (max-width: 700px) {
