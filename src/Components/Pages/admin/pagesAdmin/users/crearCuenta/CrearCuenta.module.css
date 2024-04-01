@@ -12,6 +12,7 @@
 
     @media screen and (max-width: 930px) {
         padding-top: 61.98px;
+        min-height: 89.5vh;
     }
 }
 
@@ -83,9 +84,21 @@
     margin-top: 0.8rem;
 }
 
-.error {
-    margin-top: 0.5rem;
+.contError {
+    display: flex;
+    width: 100%;
+    align-items: start;
+}
+
+.contError ul{
+    padding: 0;
+    margin: 1.5rem 0 0 1rem;
+    list-style-type: none;
     color: var(--verdeClaro);
+}
+
+.contError li {
+    margin-top: 0.2rem;
 }
 
 .btn {
@@ -113,3 +126,4 @@
     border: 1px solid var(--verdeClaro);
     cursor: auto;
 }
+

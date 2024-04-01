@@ -2,7 +2,7 @@
 .appHome {
 	width: 100vw;
 	min-height: 84.1vh;
-	padding-top: 83.03px;
+	/* padding-top: 83.03px; */
 	@media screen and (max-width: 1200px) {
 		padding-top: 66.09px;
 	}
@@ -206,6 +206,7 @@
 .linkCategorias {
 	width: 100%;
 	max-width: 29rem;
+	padding-top: 1rem;
 	flex-direction: column;
 	border: 2px solid rgba(199, 194, 194, 0.3);
 	border-top: none;
@@ -218,6 +219,7 @@
 .contLinkImg {
 	width: 100%;
 	overflow: hidden;
+	height: 80%;
 	display: flex;
 	justify-content: center;
 }

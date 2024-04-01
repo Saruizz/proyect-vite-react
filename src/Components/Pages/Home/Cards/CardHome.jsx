@@ -4,7 +4,7 @@ import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 import BotonReservas from '../../BotonReservas/BotonReservas';
 
-const CardHome = ({id}) => {
+const CardHome = ({ id }) => {
 	const [carInfo, setCarInfo] = useState([]);
 
 	useEffect(() => {
@@ -23,7 +23,7 @@ const CardHome = ({id}) => {
 
 	return (
 		<div className={styles.home}>
-			{carInfo.map((carInfo, index) => (
+			{carInfo.map(carInfo => (
 				<div className={styles.card}>
 					<span className={styles.datos}>
 						<img
@@ -44,7 +44,11 @@ const CardHome = ({id}) => {
 									 <BotonReservas/>
 								</div>
 								<div className={styles.contLink}>
-									<Link to={`/detalle/${carInfo.id}`} className={styles.btCard} onClick={handleCardClick}>
+									<Link
+										to={`/detalle/${carInfo.id}`}
+										className={styles.btCard}
+										onClick={handleCardClick}
+									>
 										Ver más
 									</Link>
 								</div>

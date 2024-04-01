@@ -1,6 +1,6 @@
 .appHeader {
     width: 100vw;
-    position: fixed;
+    /* position: fixed; */
     z-index: 100;
     top: 0; left: 0; right: 0;
     background-color: var(--blanco);
@@ -111,6 +111,24 @@
     padding: 15px 15px;
     /* Inicialmente oculto */
 }
+div.menuPrincipalCompleto {
+    top: 94px;
+    right: 0px;
+}
+ div p strong{
+    color: #fff;
+    background-color: var(--verdeClaro);
+    border: 1px solid var(--verdeClaro);
+    border-radius: 50%;
+    padding: 4px;
+}
+.chevron-down{
+    display: flex;
+    justify-content: flex-end;
+}
+.botones-header{
+    width: 150px;
+}
 .menuPrincipal .optionMenu{
     color:var(--negro);
     text-decoration: none;
@@ -126,6 +144,7 @@
 /* Muestra el menú desplegable en dispositivos móviles */
 .appHeader.mobileMenuOpen .mobileMenu {
     display: flex;
+    background-color: blueviolet;
 }
 
 /* Muestra el ícono de menú en dispositivos móviles */
@@ -141,4 +160,5 @@
         display: none;
         /* Oculta los botones en pantallas pequeñas */
     }
+
 }

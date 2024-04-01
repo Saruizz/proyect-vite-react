@@ -1,26 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styles from './CrearCuenta.module.css';
 import img from '../../../../../../assets/img';
-
-// const handleSubmit = e => {
-// 	e.preventDefault();
-// 	const formData = new FormData();
-// 	formData.append('nombre', nombre);
-// 	formData.append('apellido', apellido);
-// 	formData.append('correoElectronico', correoElectronico);
-// 	formData.append('contraseña', contraseña);
-// 	formData.append('confirmarContraseña', confirmarContraseña);
-  
-// 	axios.post('http://localhost:8081/usuarios', formData)
-// 	  .then(response => {
-// 		console.log('Formulario enviado correctamente');
-// 		console.log(response.data);
-// 	  })
-// 	  .catch(error => {
-// 		console.error('Error al enviar el formulario', error);
-// 	  });
-//   };
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const CrearCuenta = () => {
 	const [nombre, setNombre] = useState('');
@@ -29,15 +11,6 @@ const CrearCuenta = () => {
 	const [contraseña, setContraseña] = useState('');
 	const [confirmarContraseña, setConfirmarContraseña] = useState('');
 	const [errores, setErrores] = useState([]);
-	const [formularioValido, setFormularioValido] = useState(false);
-
-	const [nombreValido, setNombreValido] = useState(true);
-	const [apellidoValido, setApellidoValido] = useState(true);
-	const [correoElectronicoValido, setCorreoElectronicoValido] = useState(true);
-	const [contraseñaValida, setContraseñaValida] = useState(true);
-	const [confirmarContraseñaValida, setConfirmarContraseñaValida] =
-		useState(true);
-
 	const [passwordConfirmed, setPasswordConfirmed] = useState(false);
 
 	const expresiones = {
@@ -47,40 +20,35 @@ const CrearCuenta = () => {
 		contraseña: /^.{8,20}$/, // Al menos 8 caracteres
 	};
 
-	const handleSubmit = e => {
+	/*
+	const isEmailExistent = async email => {
+		const response = await axios.get(
+			'http://localhost:8081/usuarios/email/' + email,
+		);
+		return response.data.exists;
+	};
+	*/
+
+	async function handleSubmit(e) {
 		e.preventDefault();
 		const erroresValidacion = [];
 
-		if (nombre) {
-			if (!expresiones.nombre.test(nombre)) {
-				erroresValidacion.push('El nombre no es válido');
-			}
+		if (!expresiones.nombre.test(nombre)) {
+			erroresValidacion.push('El nombre no es válido');
 		}
-
-		if (apellido) {
-			if (!expresiones.apellido.test(apellido)) {
-				erroresValidacion.push('El apellido no es válido');
-			}
+		if (!expresiones.apellido.test(apellido)) {
+			erroresValidacion.push('El apellido no es válido');
 		}
-
-		if (correoElectronico) {
-			if (!expresiones.correoElectronico.test(correoElectronico)) {
-				erroresValidacion.push('El correo electrónico no es válido');
-			}
+		if (!expresiones.correoElectronico.test(correoElectronico)) {
+			erroresValidacion.push('El correo electrónico no es válido');
 		}
-
-		if (contraseña) {
-			if (!expresiones.contraseña.test(contraseña)) {
-				erroresValidacion.push(
-					'La contraseña debe tener entre 8 y 20 caracteres',
-				);
-			}
+		if (!expresiones.contraseña.test(contraseña)) {
+			erroresValidacion.push(
+				'La contraseña debe tener entre 8 y 20 caracteres',
+			);
 		}
-
-		if (confirmarContraseña) {
-			if (contraseña !== confirmarContraseña) {
-				erroresValidacion.push('Las contraseñas no coinciden');
-			}
+		if (contraseña !== confirmarContraseña) {
+			erroresValidacion.push('Las contraseñas no coinciden');
 		}
 
 		if (erroresValidacion.length > 0) {
@@ -88,69 +56,55 @@ const CrearCuenta = () => {
 			return;
 		}
 
+		//ERRORES DE VALIDACION - EMAIL REPETIDO:
+		if (!expresiones.correoElectronico.test(correoElectronico)) {
+			erroresValidacion.push('El correo electrónico no es válido');
+		} /* else {
+			const emailExistent = await isEmailExistent(correoElectronico);
+			if (emailExistent) {
+				erroresValidacion.push('El correo electrónico ya está registrado');
+			}
+		}*/
+
+		if (erroresValidacion.length > 0) {
+			setErrores(erroresValidacion);
+		}
+
 		// Aquí se enviaría la información del formulario al servidor
 		const formData = new FormData();
-	formData.append('nombre', nombre);
-	formData.append('apellido', apellido);
-	formData.append('correoElectronico', correoElectronico);
-	formData.append('contraseña', contraseña);
-	formData.append('confirmarContraseña', confirmarContraseña);
-  
-	axios.post('http://localhost:8081/usuarios/registrar', formData)
-	  .then(response => {
-		console.log('Formulario enviado correctamente');
-		console.log(response.data);
-	  })
-	  .catch(error => {
-		console.error('Error al enviar el formulario', error);
-	  });
-		console.log('Formulario enviado');
-	};
+		formData.append('nombre', nombre);
+		formData.append('apellido', apellido);
+		formData.append('correoElectronico', correoElectronico);
+		formData.append('contraseña', contraseña);
+		formData.append('confirmarContraseña', confirmarContraseña);
 
-	const handleChangePassword = e => {
-		setContraseña(e.target.value);
-		const passwordValida = expresiones.contraseña.test(e.target.value);
-		setContraseñaValida(passwordValida);
-		if (passwordValida) {
-			setPasswordConfirmed(true);
-		} else {
-			setPasswordConfirmed(false);
-		}
-	};
-
-	useEffect(() => {
-		const todosLlenosYValidos =
-			nombre &&
-			apellido &&
-			correoElectronico &&
-			contraseña &&
-			confirmarContraseña &&
-			nombreValido &&
-			apellidoValido &&
-			correoElectronicoValido &&
-			contraseñaValida &&
-			confirmarContraseñaValida;
-
-		setFormularioValido(todosLlenosYValidos);
-	}, [
-		nombre,
-		apellido,
-		correoElectronico,
-		contraseña,
-		confirmarContraseña,
-		nombreValido,
-		apellidoValido,
-		correoElectronicoValido,
-		contraseñaValida,
-		confirmarContraseñaValida,
-	]);
+		axios
+			.post('http://localhost:8081/usuarios', formData)
+			.then(response => {
+				console.log('Formulario enviado correctamente');
+				console.log(response.data);
+				Swal.fire('¡Producto agregado exitosamente!', '', 'success');
+				setNombre('');
+				setApellido('');
+				setCorreoElectronico('');
+				setContraseña('');
+				setConfirmarContraseña('');
+			})
+			.catch(error => {
+				console.error('Error al enviar el formulario', error);
+				Swal.fire({
+					icon: 'error',
+					title: 'Error al registrarse',
+					text: erroresValidacion.join('\n'),
+				});
+			});
+	}
 
 	return (
 		<div className={styles.appCrearUsuario}>
 			<img src={img.isoLogoA2} alt='' />
 
 			<form className={styles.contForm} onSubmit={handleSubmit}>
-				<h1>Crear cuenta</h1>
 				<div className={styles.contNombreApellido}>
 					<div className={styles.contInpNom}>
 						<label htmlFor='nombre'>Nombre:</label>
@@ -161,15 +115,8 @@ const CrearCuenta = () => {
 							value={nombre}
 							onChange={e => {
 								setNombre(e.target.value);
-								const nombreValido = expresiones.nombre.test(e.target.value);
-								setNombreValido(nombreValido);
 							}}
 						/>
-						{nombre && !nombreValido ? (
-							<span className={styles.error}>
-								Invalido: el nombre debe tener mas de 2 caracteres
-							</span>
-						) : null}
 					</div>
 					<div className={styles.contInpApe}>
 						<label htmlFor='apellido'>Apellido:</label>
@@ -180,19 +127,11 @@ const CrearCuenta = () => {
 							value={apellido}
 							onChange={e => {
 								setApellido(e.target.value);
-								const apellidoValido = expresiones.apellido.test(
-									e.target.value,
-								);
-								setApellidoValido(apellidoValido);
 							}}
 						/>
-						{apellido && !apellidoValido ? (
-							<span className={styles.error}>
-								Invalido: el apellido debe tener mas de 2 caracteres
-							</span>
-						) : null}
 					</div>
 				</div>
+
 				<div className={styles.contInp}>
 					<label htmlFor='correoElectronico'>Correo electrónico:</label>
 					<input
@@ -202,14 +141,8 @@ const CrearCuenta = () => {
 						value={correoElectronico}
 						onChange={e => {
 							setCorreoElectronico(e.target.value);
-							const correoElectronicoValido =
-								expresiones.correoElectronico.test(e.target.value);
-							setCorreoElectronicoValido(correoElectronicoValido);
 						}}
 					/>
-					{correoElectronico && !correoElectronicoValido ? (
-						<span className={styles.error}>Correo electrónico invalido</span>
-					) : null}
 				</div>
 
 				<div className={styles.contInp}>
@@ -219,13 +152,10 @@ const CrearCuenta = () => {
 						id='contraseña'
 						name='contraseña'
 						value={contraseña}
-						onChange={handleChangePassword}
+						onChange={e => {
+							setContraseña(e.target.value);
+						}}
 					/>
-					{contraseña && !contraseñaValida ? (
-						<span className={styles.error}>
-							Invalido: la contraseña debe tener mas de 6 caracteres
-						</span>
-					) : null}
 				</div>
 
 				<div className={styles.contInp}>
@@ -237,23 +167,22 @@ const CrearCuenta = () => {
 						value={confirmarContraseña}
 						onChange={e => {
 							setConfirmarContraseña(e.target.value);
-							const confirmarContraseñaValida = contraseña === e.target.value;
-							setConfirmarContraseñaValida(confirmarContraseñaValida);
 						}}
-						disabled={!passwordConfirmed}
+						disabled={passwordConfirmed}
 					/>
-					{confirmarContraseña && !confirmarContraseñaValida ? (
-						<span className={styles.error}>
-							Invalido: las contraseñas nos coinciden
-						</span>
-					) : null}
 				</div>
 
-				<button
-					className={styles.btn}
-					type='submit'
-					disabled={!formularioValido}
-				>
+				<div className={styles.contError}>
+					{errores.length > 0 && (
+						<ul>
+							{errores.map(error => (
+								<li key={error}>{error}</li>
+							))}
+						</ul>
+					)}
+				</div>
+
+				<button className={styles.btn} type='submit'>
 					Crear cuenta
 				</button>
 			</form>

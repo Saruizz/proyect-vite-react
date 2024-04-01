@@ -6,51 +6,51 @@ import Swal from 'sweetalert2';
 import { getToken } from '../../../../token/tokenService';
 
 const AgregarProducto = () => {
-  const [info, setInfo] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [imagenes, setImagenes] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [error, setError] = useState('');
+	const [info, setInfo] = useState('');
+	const [nombre, setNombre] = useState('');
+	const [descripcion, setDescripcion] = useState('');
+	const [imagenes, setImagenes] = useState([]);
+	const [selectedOption, setSelectedOption] = useState('');
+	const [error, setError] = useState('');
 
-  useEffect(() => {
-    axios.get('http://localhost:8081/vehiculos/listar').then(res => {
-      setInfo(res.data);
-    });
-  }, []);
+	useEffect(() => {
+		axios.get('http://localhost:8081/vehiculos/listar').then(res => {
+			setInfo(res.data);
+		});
+	}, []);
 
-  const handleNombreChange = e => {
-    setNombre(e.target.value);
-    setError('');
-  };
+	const handleNombreChange = e => {
+		setNombre(e.target.value);
+		setError('');
+	};
 
-  const handleDescripcionChange = e => {
-    setDescripcion(e.target.value);
-  };
+	const handleDescripcionChange = e => {
+		setDescripcion(e.target.value);
+	};
 
-  const handleImagenesChange = e => {
-    setImagenes(e.target.value);
-  };
+	const handleImagenesChange = e => {
+		setImagenes(e.target.value);
+	};
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+	const handleChange = event => {
+		setSelectedOption(event.target.value);
+	};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+	const handleSubmit = async e => {
+		e.preventDefault();
 
-    // Validar que el nombre no esté vacío
-    if (!nombre.trim()) {
-      setError('El nombre del producto es obligatorio');
-      return;
-    }
+		// Validar que el nombre no esté vacío
+		if (!nombre.trim()) {
+			setError('El nombre del producto es obligatorio');
+			return;
+		}
 
-    // Validar que el nombre del producto no exista
-    const nombreExistente = info.find(item => item.nombre === nombre);
-    if (nombreExistente) {
-      setError('El nombre del producto ya está en uso');
-      return;
-    }
+		// Validar que el nombre del producto no exista
+		const nombreExistente = info.find(item => item.nombre === nombre);
+		if (nombreExistente) {
+			setError('El nombre del producto ya está en uso');
+			return;
+		}
 
     try {
       const playload = {
