@@ -14,7 +14,7 @@ const ListarUsuarios = () => {
                     Authorization: `Bearer ${token}` // Enviar el token en el encabezado de autorización
                 }
             }).then(res => {
-				const usuariosConPermiso = res.data.map(user => ({...user, permiso: 'Ninguno'}));
+				const usuariosConPermiso = res.data.map(user => ({...user, administrador: user.administrador === 1 ? 'Administrador' : 'Cliente'}));
 				setUsers(usuariosConPermiso);
 			});
 		} catch (error) {
@@ -25,38 +25,44 @@ const ListarUsuarios = () => {
 	
 	const handleAgregar = (userId) => { 
 		const token = getToken();
-		axios.put(`http://localhost:8081/usuarios/permisos/${users.id}`, {
-			permiso: 'Administrador'
+		axios.put(`http://localhost:8081/usuarios/permisos/${userId}`, {
+			"administrador": 1
 		}, {
             headers: {
                 Authorization: `Bearer ${token}` // Enviar el token en el encabezado de autorización
             }
-        }).then(() => {
+        }).then(res => {
 			// Actualizar el estado local 
-			setUsers(prevUsers =>
-				prevUsers.map(user =>
-					user.id === userId
-						? { ...user, permiso: 'Administrador' }
-						: user
+			setUsers(usuariosPrevios =>
+				usuariosPrevios.map(usuario =>
+				  usuario.id === userId
+					? { ...usuario, administrador: 'Administrador' }
+					: usuario
 				)
 			);
+			window.location.reload();
 		}).catch(error => {
 			console.error('Error al actualizar los permisos del usuario:', error);
 		});
 	};
 
 	const handleQuitar = (userId) => {
-
-		axios.put(`http://localhost:8081/usuarios/permisos/${users.id}`, {
-			permiso: 'Ninguno'
-		}).then(() => {
-			setUsers(prevUsers =>
+		const token = getToken();
+		axios.put(`http://localhost:8081/usuarios/permisos/${userId}`, {
+			"administrador": 0
+		},{
+            headers: {
+                Authorization: `Bearer ${token}` // Enviar el token en el encabezado de autorización
+            }}
+		).then(res => {
+			setUsers( prevUsers =>
 				prevUsers.map(user =>
 					user.id === userId
-						? { ...user, permiso: 'Ninguno' }
+						? { ...user, administrador: 'Cliente' }
 						: user
 				)
 			);
+			window.location.reload();
 		}).catch(error => {
 			console.error('Error al quitar los permisos del usuario:', error);
 		});
@@ -81,13 +87,13 @@ const ListarUsuarios = () => {
 								<td>{user.nombre}</td>
 								<td>{user.apellido}</td>
 								<td>{user.correoElectronico}</td>
-								<td>{user.permiso}</td>
+								<td>{user.administrador}</td>
 								<td className={styles.permiso}>
 									<button className = {styles.botonAgregar} 
-									onClick={() => handleAgregar(user.id)}>
+									onClick={() => handleAgregar(user.idUsuario)}>
 										Añadir permisos
 									</button>
-									<button className = {styles.botonQuitar} onClick={() => handleQuitar(user.id)}>
+									<button className = {styles.botonQuitar} onClick={() => handleQuitar(user.idUsuario)}>
 										Quitar permisos
 									</button>
 								</td>

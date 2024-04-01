@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
+import BotonReservas from '../../BotonReservas/BotonReservas';
 
 const CardHome = ({id}) => {
 	const [carInfo, setCarInfo] = useState([]);
@@ -40,7 +41,7 @@ const CardHome = ({id}) => {
 							</div>
 							<div className={styles.botones}>
 								<div className={styles.contLink}>
-									<Link className={styles.btCard}>Reservar</Link>
+									 <BotonReservas/>
 								</div>
 								<div className={styles.contLink}>
 									<Link to={`/detalle/${carInfo.id}`} className={styles.btCard} onClick={handleCardClick}>

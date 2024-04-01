@@ -72,9 +72,6 @@
     box-shadow: 0 0 0.5px var(--grisClaro);
 }
 
-.fileInput input[type='file'] {
-    display: none;
-}
 
 .fileInput {
     display: flex;
@@ -92,7 +89,7 @@
     padding: 15px 25px;
     font-weight: bold;
     text-align: center;
-    width: fit-content;
+    width: 180px;
 }
 
 .fileInput label:hover {

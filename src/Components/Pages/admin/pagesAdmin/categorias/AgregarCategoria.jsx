@@ -88,7 +88,7 @@ const AgregarCategoria = () => {
 				</span>
 				<span className={styles.contCategoria}>
 					<div className={styles.fileInput}>
-						<label htmlFor='imagenes'>Subir imagen</label>
+						<label htmlFor='imagenes'>Agregar URL</label>
 						<input 
 						type='text' 
 						id='imagen' 

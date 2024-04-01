@@ -96,7 +96,7 @@ const CrearCuenta = () => {
 	formData.append('contraseña', contraseña);
 	formData.append('confirmarContraseña', confirmarContraseña);
   
-	axios.post('http://localhost:8081/usuarios', formData)
+	axios.post('http://localhost:8081/usuarios/registrar', formData)
 	  .then(response => {
 		console.log('Formulario enviado correctamente');
 		console.log(response.data);

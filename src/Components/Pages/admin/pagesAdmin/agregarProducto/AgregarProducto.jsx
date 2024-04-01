@@ -64,7 +64,7 @@ const AgregarProducto = () => {
       };
   
       const token = getToken();
-  
+      
       const response = await fetch('http://localhost:8081/vehiculos/agregar', {
         method: 'POST',
         headers: {
@@ -126,7 +126,7 @@ const AgregarProducto = () => {
         </span>
         <span className={styles.contenedor}>
           <div className={styles.fileInput}>
-            <label htmlFor='imagenes'>Subir imágenes</label>
+            <label htmlFor='imagenes'>Agregar URL</label>
             <input
               type='text'
               id='imagenes'

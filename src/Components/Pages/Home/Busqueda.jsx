@@ -11,7 +11,6 @@ import axios from 'axios';
 
 const FormularioBusqueda = () => {
 	const [vehiculos, setVehiculos] = useState([]);
-	const [busqueda, setBusqueda] = useState('');
 	const [open, setOpen] = useState(false);
 	const refOne = useRef(null);
 	const [placeholderText, setPlaceholderText] = useState(
@@ -32,12 +31,17 @@ const FormularioBusqueda = () => {
 	]);
 
 	const [modalOpen, setModalOpen] = useState(false);
+	const [consulta, setConsulta] = useState('');
 
 	useEffect(() => {
 		axios.get('http://localhost:8081/vehiculos/busqueda').then(res => {
-			setBusqueda(res.data);
+			setConsulta(res.data);
 		});
 	}, []);
+
+	const handleConsultaChange = e => {
+		setConsulta(e.target.value);
+	}
 
 	const handleRangeChange = newRange => {
 		setRange([newRange.selection]);
@@ -56,19 +60,28 @@ const FormularioBusqueda = () => {
 			),
 		);
 	};
-
-	const handleBusquedaChange = e => {
-		setBusqueda(e.target.value);
-	};
-
-	const handleSubmit = () => {
+	
+	const handleSubmit = async () => {
 		// Enviar la búsqueda al backend
-		fetch(`/busqueda?consulta=${consulta}`).then(response => {
-			// Mostrar los datos filtrados
-			const vehiculos = response.json();
-			// Actualizar el estado de React con los datos filtrados
-			setVehiculos(vehiculos);
-		});
+
+		const payload ={
+			consulta: consulta
+		};
+	
+		try {
+			const queryString = new URLSearchParams(payload).toString();
+			const resultado = await fetch(`http://localhost:8081/vehiculos/busqueda?${queryString}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			console.log(resultado)
+			const vehiculos = await resultado.json();
+			console.log(vehiculos);
+		} catch (error) {
+			console.error('Error al realizar la búsqueda:', error);
+		}
 	};
 
 	return (
@@ -95,8 +108,8 @@ const FormularioBusqueda = () => {
 						<input
 							type='text'
 							placeholder='Ej: Kia Picanto'
-							value={busqueda}
-							onChange={handleBusquedaChange}
+							value={consulta}
+							onChange={handleConsultaChange}
 						/>
 						<input
 							value={placeholderText}
@@ -134,11 +147,6 @@ const FormularioBusqueda = () => {
 					>
 						Realizar búsqueda
 					</button>
-					<ul>
-						{vehiculos.map(vehiculo => (
-							<li key={vehiculo.id}>{vehiculo.nombre}</li>
-						))}
-					</ul>
 				</form>
 			</div>
 			<img src={img.isoLogoC2} />

@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from './IniciarSesion.module.css';
 import img from '../../../../../../assets/img';
 import { useAuth } from '../../../../../../AuthContext';
+import { Link } from 'react-router-dom';
 
 function IniciarSesion() {
     const [email, setEmail] = useState('');
@@ -37,6 +38,7 @@ function IniciarSesion() {
 
     return (
         <div className={styles.iniciarSesion}>
+            <p>El login es obligatorio para realizar reservas, en caso de no estar registrado, <Link to={'/crearCuenta'}> registrarse </Link></p>
             <h2 className={styles.titulo}>Iniciar Sesión</h2>
             {error && <p>{error}</p>}
             <div className={styles.login}>
