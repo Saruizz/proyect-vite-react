@@ -2,6 +2,7 @@
 .appDetalle {
     width: 100vw;
     min-height: 84.1vh;
+    padding-top: 83.03px;
     background-color: var(--blanco);
     @media screen and (max-width: 1200px) {
         padding-top: 66.09px;

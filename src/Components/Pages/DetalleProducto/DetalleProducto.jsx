@@ -12,7 +12,7 @@ const DetalleProducto = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		axios.get(`http://localhost:8081/vehiculos/detalle/${id}`).then(res => {
+		axios.get(`http://localhost:8081/vehiculos/${id}`).then(res => {
 			setCar(res.data);
 		});
 	}, [id]);
@@ -77,7 +77,7 @@ const DetalleProducto = () => {
 					<img src={img.calendario} />
 					<h3>Disponibilidad</h3>
 				</div>
-				<CalendarioDetalle />
+				<CalendarioDetalle vehiculoId={id} />
 			</div>
 		</div>
 	);
