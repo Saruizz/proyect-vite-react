@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Detalle.module.css';
 import img from '../../../assets/img';
 import CalendarioDetalle from './CalendarioDetalle';
+import BotonReservas from '../Reservas/BotonReservas';
 
 const DetalleProducto = () => {
 	const [car, setCar] = useState({ imagenes: [] });
@@ -60,9 +60,13 @@ const DetalleProducto = () => {
 					</div>
 				</div>
 			</div>
-
-			<div className={styles.contBtn}>
-				<button className={styles.btnVerMas}>Ver más</button>
+			<div className={styles.contBtn} >
+				<div className={styles.contBtn}>
+					<BotonReservas/>
+				</div>
+				<div className={styles.contBtn}>
+					<button className={styles.btnVerMas}>Ver más</button>
+				</div>
 			</div>
 			<div className={styles.contDescripcion}>
 				<span>{car.descripcion}</span>

@@ -2,16 +2,34 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
-import BotonReservas from '../../BotonReservas/BotonReservas';
+import BotonReservas from '../../Reservas/BotonReservas';
+import Swal from 'sweetalert2';
 
 const CardHome = ({ id }) => {
 	const [carInfo, setCarInfo] = useState([]);
+	const [favorites, setFavorites] = useState([]);
 
 	useEffect(() => {
 		axios.get('http://localhost:8081/vehiculos/aleatorios').then(res => {
 			setCarInfo(res.data.slice(0, 6));
 		});
 	}, []);
+
+	const addToFavorites = index => {
+		const updatedFavorites = [...favorites];
+		const car = carInfo[index];
+
+		if (!favorites.includes(car)) {
+			updatedFavorites.push(car);
+			setFavorites(updatedFavorites);
+			// Muestro la alerta de SweetAlert
+			Swal.fire({
+				icon: 'success',
+				title: 'Agregado a favoritos',
+				text: 'El vehiculo ha sido agregado a tus favoritos',
+			});
+		}
+	};
 
 	const handleCardClick = id => {
 		// Redirect to the vehicle's detail page using the id
@@ -23,9 +41,17 @@ const CardHome = ({ id }) => {
 
 	return (
 		<div className={styles.home}>
-			{carInfo.map(carInfo => (
-				<div className={styles.card}>
+			{carInfo.map((carInfo, index)=> (
+				<div className={styles.card} key={carInfo.id}>
 					<span className={styles.datos}>
+						<div className={styles.contLink}>
+							<button
+								className={styles.btCardFav}
+								onClick={() => addToFavorites(index)}
+							>
+								🖤
+							</button>
+						</div>
 						<img
 							className={styles.automovil}
 							src={carInfo.imagenes.length > 0 ? carInfo.imagenes[0].url : ''}
@@ -41,7 +67,7 @@ const CardHome = ({ id }) => {
 							</div>
 							<div className={styles.botones}>
 								<div className={styles.contLink}>
-									 <BotonReservas/>
+									<BotonReservas />
 								</div>
 								<div className={styles.contLink}>
 									<Link
