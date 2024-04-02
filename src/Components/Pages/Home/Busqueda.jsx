@@ -9,8 +9,8 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
 
-const FormularioBusqueda = () => {
-	// const [vehiculos, setVehiculos] = useState([]);
+const FormularioBusqueda = ({ funciones }) => {
+	const [vehiculos, setVehiculos] = useState([]);
 	const [open, setOpen] = useState(false);
 	const refOne = useRef(null);
 	const [placeholderText, setPlaceholderText] = useState(
@@ -60,9 +60,8 @@ const FormularioBusqueda = () => {
 
 		e.preventDefault();
 		const payload = {};
-
-		console.log(range);
 		const categoria = [];
+
 		if (
 			categories[0].checked ||
 			categories[1].checked ||
@@ -118,10 +117,13 @@ const FormularioBusqueda = () => {
 			}
 
 			const data = await response.json();
-			// console.log(data);
+			console.log(data);
+			funciones.onRealizarBusqueda(data); 
 		} catch (error) {
 			console.error('Error al realizar la búsqueda:', error);
-		}
+		};
+
+		// Llama a la función de Home para mostrar los resultados
 	};
 
 	return (

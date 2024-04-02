@@ -1,8 +1,17 @@
 import React from 'react'
 
-const ResultadosBusqueda = () => {
+const ResultadosBusqueda = ({data}) => {
   return (
-    <div>ResultadosBusqueda</div>
+    <div>
+      <h2>Resultados de Busqueda</h2>
+      {data && (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.nombre}</li> // Ejemplo de renderización de items
+          ))}
+        </ul>
+      )}
+    </div>
   )
 }
 
