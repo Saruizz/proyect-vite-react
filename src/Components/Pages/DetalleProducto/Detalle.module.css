@@ -164,9 +164,27 @@
 }
 
 /* CARACTERISTICAS */
-.contCaracteristicas{
+.contCaracteristicas {
     width: 100vw;
     padding: 1rem 5rem;
+}
+
+.listaCaracteristicas {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.listaCaracteristicas li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.listaCaracteristicas img {
+    width: 1.5rem;
+    margin-right: 5px;
 }
 
 /* CALENDARIO */

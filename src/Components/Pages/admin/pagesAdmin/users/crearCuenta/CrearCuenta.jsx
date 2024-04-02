@@ -3,28 +3,28 @@ import img from '../../../../../../assets/img';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CrearCuenta = () => {
 	const [nombre, setNombre] = useState('');
 	const [apellido, setApellido] = useState('');
 	const [correoElectronico, setCorreoElectronico] = useState('');
-	const [contraseña, setContraseña] = useState('');
-	const [confirmarContraseña, setConfirmarContraseña] = useState('');
+	const [contrasenia, setContrasenia] = useState('');
+	const [confirmarContrasenia, setConfirmarContrasenia] = useState('');
 	const [errores, setErrores] = useState([]);
 	const [passwordConfirmed, setPasswordConfirmed] = useState(false);
+	const navigate = useNavigate();
 
 	const expresiones = {
 		nombre: /^[a-zA-Záéíóúñ\s]{3,40}$/, // Letras y espacios, mínimo 3 caracteres
 		apellido: /^[a-zA-Záéíóúñ\s]{3,40}$/, // Letras y espacios, mínimo 3 caracteres
 		correoElectronico: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-		contraseña: /^.{8,20}$/, // Al menos 8 caracteres
+		contrasenia: /^.{8,20}$/, // Al menos 8 caracteres
 	};
 
 	/*
 	const isEmailExistent = async email => {
-		const response = await axios.get(
-			'http://localhost:8081/usuarios/email/' + email,
-		);
+		const response = await axios.get('http://localhost:8081/usuarios/registro');
 		return response.data.exists;
 	};
 	*/
@@ -42,12 +42,12 @@ const CrearCuenta = () => {
 		if (!expresiones.correoElectronico.test(correoElectronico)) {
 			erroresValidacion.push('El correo electrónico no es válido');
 		}
-		if (!expresiones.contraseña.test(contraseña)) {
+		if (!expresiones.contrasenia.test(contrasenia)) {
 			erroresValidacion.push(
-				'La contraseña debe tener entre 8 y 20 caracteres',
+				'La contrasenia debe tener entre 8 y 20 caracteres',
 			);
 		}
-		if (contraseña !== confirmarContraseña) {
+		if (contrasenia !== confirmarContrasenia) {
 			erroresValidacion.push('Las contraseñas no coinciden');
 		}
 
@@ -59,7 +59,7 @@ const CrearCuenta = () => {
 		//ERRORES DE VALIDACION - EMAIL REPETIDO:
 		if (!expresiones.correoElectronico.test(correoElectronico)) {
 			erroresValidacion.push('El correo electrónico no es válido');
-		} /* else {
+		} /*else {
 			const emailExistent = await isEmailExistent(correoElectronico);
 			if (emailExistent) {
 				erroresValidacion.push('El correo electrónico ya está registrado');
@@ -70,25 +70,18 @@ const CrearCuenta = () => {
 			setErrores(erroresValidacion);
 		}
 
-		// Aquí se enviaría la información del formulario al servidor
-		const formData = new FormData();
-		formData.append('nombre', nombre);
-		formData.append('apellido', apellido);
-		formData.append('correoElectronico', correoElectronico);
-		formData.append('contraseña', contraseña);
-		formData.append('confirmarContraseña', confirmarContraseña);
-
 		axios
-			.post('http://localhost:8081/usuarios', formData)
+			.post('http://localhost:8081/registro', {
+				nombre: nombre,
+				apellido: apellido,
+				correoElectronico: correoElectronico,
+				contrasenia: contrasenia,
+			})
 			.then(response => {
 				console.log('Formulario enviado correctamente');
 				console.log(response.data);
 				Swal.fire('¡Producto agregado exitosamente!', '', 'success');
-				setNombre('');
-				setApellido('');
-				setCorreoElectronico('');
-				setContraseña('');
-				setConfirmarContraseña('');
+				navigate('/'); // Redirigir al usuario a la página de perfil u otra página después de registrar usuario
 			})
 			.catch(error => {
 				console.error('Error al enviar el formulario', error);
@@ -146,27 +139,27 @@ const CrearCuenta = () => {
 				</div>
 
 				<div className={styles.contInp}>
-					<label htmlFor='contraseña'>Contraseña:</label>
+					<label htmlFor='contrasenia'>Contraseña:</label>
 					<input
 						type='password'
-						id='contraseña'
-						name='contraseña'
-						value={contraseña}
+						id='contrasenia'
+						name='contrasenia'
+						value={contrasenia}
 						onChange={e => {
-							setContraseña(e.target.value);
+							setContrasenia(e.target.value);
 						}}
 					/>
 				</div>
 
 				<div className={styles.contInp}>
-					<label htmlFor='confirmarContraseña'>Confirmar contraseña:</label>
+					<label htmlFor='confirmarContrasenia'>Confirmar contrasenia:</label>
 					<input
 						type='password'
-						id='confirmarContraseña'
-						name='confirmarContraseña'
-						value={confirmarContraseña}
+						id='confirmarContrasenia'
+						name='confirmarContrasenia'
+						value={confirmarContrasenia}
 						onChange={e => {
-							setConfirmarContraseña(e.target.value);
+							setConfirmarContrasenia(e.target.value);
 						}}
 						disabled={passwordConfirmed}
 					/>

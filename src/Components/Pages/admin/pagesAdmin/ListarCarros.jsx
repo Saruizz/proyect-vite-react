@@ -58,31 +58,38 @@ const CarList = () => {
 	return (
 		<div className={styles.appListarCarros}>
 			<h2>Lista de carros</h2>
-			<table>
+			<table class={styles.table}>
 				<thead>
-					<tr>
+					<tr class={styles.trTable}>
+						<th>ID</th>
 						<th>Imagen</th>
 						<th>Nombre</th>
-						<th>ID</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					{users.map((user, index) => (
 						<tr key={user.id}>
-							<td>
+							<td class={styles.nombreId}>{user.id}</td>
+							<td class={styles.nombreImg}>
 								<img
 									src={user.imagenes.length > 0 ? user.imagenes[0].url : ''}
-									style={{ width: '200px', height: 'auto' }}
+									style={{ width: '300px', height: 'auto' }}
 								/>
 							</td>
-							<td>{user.nombre}</td>
-							<td>{user.id}</td>
-							<td>
-								<button onClick={() => handleEdit(user.id)}>
+							<td class={styles.nombreList}>{user.nombre}</td>
+
+							<td class={styles.botonesListar}>
+								<button
+									className={styles.editarCarro}
+									onClick={() => handleEdit(user.id)}
+								>
 									Editar Carro
 								</button>
-								<button onClick={() => handleDelete(user.id)}>
+								<button
+									className={styles.eliminarCarro}
+									onClick={() => handleDelete(user.id)}
+								>
 									Eliminar Carro
 								</button>
 							</td>

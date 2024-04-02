@@ -12,7 +12,7 @@ const DetalleProducto = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		axios.get(`http://localhost:8081/vehiculos/${id}`).then(res => {
+		axios.get(`http://localhost:8081/vehiculos/detalle/${id}`).then(res => {
 			setCar(res.data);
 		});
 	}, [id]);
@@ -71,6 +71,20 @@ const DetalleProducto = () => {
 				<div>
 					<h3>Características</h3>
 				</div>
+				<ul className={styles.listaCaracteristicas}>
+					<li>
+						<img src={img.iconoTelevisor} />
+						<p>Pantalla</p>
+					</li>
+					<li>
+						<img src={img.iconoMascota} />
+						<p>Permitido mascotas</p>
+					</li>
+					<li>
+						<img src={img.aire} />
+						<p>Aire acondicionado</p>
+					</li>
+				</ul>
 			</div>
 			<div className={styles.contCalendario}>
 				<div className={styles.contImgCal}>

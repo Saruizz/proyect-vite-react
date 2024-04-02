@@ -3,9 +3,66 @@
     min-height: 84.1vh;
     padding-top: 83.03px;
     background-color: var(--blanco);
+
     @media screen and (max-width: 1200px) {
         padding-top: 66.09px;
     }
+
+
+    .trTable {
+        height: 40px;
+        background-color: #EFEEEE;
+        border-bottom: 4px solid #43BE32;
+    }
+
+    .table {
+        border-collapse: collapse;
+        width: 100vw;
+    }
+
+    .nombreId {
+        font-weight: bolder;
+        padding-left: 40px;
+        padding-right: 40px;
+        text-align: center;
+    }
+
+    .nombreImg {
+        text-align: center;
+    }
+
+    .nombreList {
+        text-align: center;
+    }
+
+    .botonesListar {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .editarCarro {
+        border-radius: 50px;
+        background-color: green;
+        border: none;
+        height: 40px;
+        width: 170px;
+        color: white;
+        margin-top: 10px;
+
+    }
+
+    .eliminarCarro {
+        border-radius: 50px;
+        background-color: #1F3F27;
+        border: none;
+        height: 40px;
+        width: 170px;
+        color: white;
+        margin-top: 10px;
+    }
+
 
     @media screen and (max-width: 930px) {
         padding-top: 61.98px;
