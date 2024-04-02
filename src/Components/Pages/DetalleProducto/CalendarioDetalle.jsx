@@ -93,7 +93,7 @@ const CalendarioDetalle = () => {
 
 export default CalendarioDetalle;
 */
-
+/*
 import { useState, useEffect } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -173,6 +173,88 @@ const CalendarioDetalle = () => {
 	return (
 		<div className='calendario-container'>
 			<div className='calendario-card'>
+				<DateRange
+					ranges={[selectionRange]}
+					onChange={handleSelect}
+					rangeColors={['#43BE32']}
+					disabledDates={fechasOcupadas}
+					showDateDisplay={false}
+					months={monthsToShow}
+					direction='horizontal'
+					locale={es}
+					minDate={new Date()}
+				/>
+			</div>
+		</div>
+	);
+};
+
+export default CalendarioDetalle;
+*/
+
+import { useState, useEffect } from 'react';
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import './CalendarioDetalle.css';
+import es from 'date-fns/locale/es';
+import axios from 'axios';
+
+const CalendarioDetalle = ({ vehiculoId }) => {
+	const [fechasOcupadas, setFechasOcupadas] = useState([]);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const obtenerFechasOcupadas = async () => {
+			try {
+				const response = await axios.get(
+					'http://localhost:8081/vehiculos/fechasocupadas/${vehiculoId}',
+				);
+				const { data } = response;
+				const { fechasOcupadas } = data;
+				setFechasOcupadas(fechasOcupadas);
+			} catch (error) {
+				setError(error.message);
+			}
+		};
+
+		obtenerFechasOcupadas();
+	}, [vehiculoId]);
+
+	const [selectionRange, setSelectionRange] = useState({
+		startDate: new Date(),
+		endDate: new Date(),
+		key: 'selection',
+	});
+
+	const [monthsToShow, setMonthsToShow] = useState(
+		window.innerWidth <= 768 ? 1 : 2,
+	);
+
+	const handleSelect = ranges => {
+		setSelectionRange(ranges.selection);
+	};
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth <= 768) {
+				setMonthsToShow(1);
+			} else {
+				setMonthsToShow(2);
+			}
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	return (
+		<div className='calendario-container'>
+			<div className='calendario-card'>
+				{error && <div>Error: {error}</div>}
 				<DateRange
 					ranges={[selectionRange]}
 					onChange={handleSelect}
