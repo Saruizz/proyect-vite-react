@@ -10,7 +10,7 @@ import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
 
 const FormularioBusqueda = () => {
-	const [vehiculos, setVehiculos] = useState([]);
+	// const [vehiculos, setVehiculos] = useState([]);
 	const [open, setOpen] = useState(false);
 	const refOne = useRef(null);
 	const [placeholderText, setPlaceholderText] = useState(
@@ -18,37 +18,31 @@ const FormularioBusqueda = () => {
 	);
 	const [range, setRange] = useState([
 		{
-			startDate: new Date(),
-			endDate: addDays(new Date(), 7),
+			// startDate: format ([], 'yyyy-MM-dd'),
+			// endDate: format ([], 'yyyy-MM-dd'),
 			key: 'selection',
 		},
 	]);
 
 	const [categories, setCategories] = useState([
-		{ id: 'Automovil', label: 'Automóvil' },
-		{ id: 'Suv', label: 'SUV' },
-		{ id: 'Van', label: 'Van' },
+		{ id: 1, label: 'Automóvil' },
+		{ id: 2, label: 'SUV' },
+		{ id: 3, label: 'Van' },
 	]);
 
 	const [modalOpen, setModalOpen] = useState(false);
 	const [consulta, setConsulta] = useState('');
 
-	useEffect(() => {
-		axios.get('http://localhost:8081/vehiculos/busqueda').then(res => {
-			setConsulta(res.data);
-		});
-	}, []);
-
 	const handleConsultaChange = e => {
 		setConsulta(e.target.value);
-	}
+	};
 
 	const handleRangeChange = newRange => {
 		setRange([newRange.selection]);
 		setPlaceholderText(
-			`${format(newRange.selection.startDate, 'MM/dd/yyyy')} - ${format(
+			`${format(newRange.selection.startDate, 'yyyy-MM-dd')} - ${format(
 				newRange.selection.endDate,
-				'MM/dd/yyyy',
+				'yyyy-MM-dd',
 			)}`,
 		);
 	};
@@ -60,25 +54,71 @@ const FormularioBusqueda = () => {
 			),
 		);
 	};
-	
-	const handleSubmit = async () => {
+
+	const handleSubmit = async e => {
 		// Enviar la búsqueda al backend
 
-		const payload ={
-			consulta: consulta
-		};
-	
+		e.preventDefault();
+		const payload = {};
+
+		console.log(range);
+		const categoria = [];
+		if (
+			categories[0].checked ||
+			categories[1].checked ||
+			categories[2].checked
+		) {
+			for (let i = 0; i < categories.length; i++) {
+				if (categories[i].checked) {
+					categoria.push(categories[i].id);
+				}
+			}
+			payload.categoria = categoria
+		}
+
+		if (range[0]?.startDate != null && range[0]?.endDate != null) {
+			// Obtener el año, mes y día
+			const year = range[0].startDate.getFullYear();
+			const month = range[0].startDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+			const day = range[0].startDate.getDate();
+
+			// Formatear la fecha en el formato "YYYY-MM-DD"
+			const fechaInicial = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+			const year1 = range[0].endDate.getFullYear();
+			const month1 = range[0].endDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+			const day1 = range[0].endDate.getDate();
+
+			// Formatear la fecha en el formato "YYYY-MM-DD"
+			const fechaFinal = `${year1}-${month1.toString().padStart(2, '0')}-${day1.toString().padStart(2, '0')}`;
+		
+			payload.fechaInicial = fechaInicial;
+			payload.fechaFinal = fechaFinal;
+		}
+
+		if(consulta != ''){
+			payload.consulta = consulta;
+		}
+		
+
+		console.log(payload);
+
 		try {
-			const queryString = new URLSearchParams(payload).toString();
-			const resultado = await fetch(`http://localhost:8081/vehiculos/busqueda?${queryString}`, {
-				method: 'GET',
+			const response = await fetch('http://localhost:8081/vehiculos/busqueda', {
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
+				body: JSON.stringify(payload),
 			});
-			console.log(resultado)
-			const vehiculos = await resultado.json();
-			console.log(vehiculos);
+
+			console.log(response);
+			if (!response.ok) {
+				throw new Error(`Error en la solicitud: ${response.status}`);
+			}
+
+			const data = await response.json();
+			// console.log(data);
 		} catch (error) {
 			console.error('Error al realizar la búsqueda:', error);
 		}
@@ -96,7 +136,7 @@ const FormularioBusqueda = () => {
 					cuidar el medio ambiente. Al elegir un automóvil con nosotros, estás
 					contribuyendo a un futuro más sostenible y responsable.{' '}
 				</p>
-				<form className={styles.itemInputBusqueda}>
+				<form className={styles.itemInputBusqueda} onSubmit={handleSubmit}>
 					<div className={styles.buscador}>
 						<button
 							type='button'
@@ -140,11 +180,7 @@ const FormularioBusqueda = () => {
 							)}
 						</div>
 					</div>
-					<button
-						className={styles.btBusqueda}
-						type='submit'
-						onClick={handleSubmit}
-					>
+					<button className={styles.btBusqueda} type='submit'>
 						Realizar búsqueda
 					</button>
 				</form>

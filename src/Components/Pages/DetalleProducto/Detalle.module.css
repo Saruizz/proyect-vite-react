@@ -118,7 +118,7 @@
 .contBtn {
     display: flex;
     justify-content: end;
-    padding: 1.5rem 5rem;
+    padding: 1rem 1rem;
     background-color: var(--blanco);
     border-radius: 0 0 10px 12px;
     @media screen and (max-width: 700px) {
@@ -127,7 +127,7 @@
 }
 
 .btnVerMas {    
-    padding: 0.7rem 3rem;
+    padding: 0.2rem 2rem;
     background-color: var(--verdeClaro);
     color: var(--blanco);
     font-size: 16px;
@@ -136,6 +136,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+
 }
 
 .btnVerMas:hover {
@@ -143,6 +144,8 @@
     background-color: var(--verdeOscuro);
     border: 1px solid var(--verdeOscuro);
 }
+
+
 
 /*DESCRIPCION*/
 

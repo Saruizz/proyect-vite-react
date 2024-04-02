@@ -11,9 +11,6 @@ const BotonesHeader = () => {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
 
-
-    console.log("dfsdfsd "+JSON.stringify(userData));
-
     useEffect(() => {
         // Suscribirse a los cambios en decode
         // Esto se ejecutará cada vez que decode cambie
