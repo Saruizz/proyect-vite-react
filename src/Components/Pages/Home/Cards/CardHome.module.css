@@ -104,3 +104,12 @@
     flex-direction: row;
     justify-content:space-around;
 }
+.contBusquedaResul h2{
+    color: var(--verdeOscuro);
+    margin-top: 0%;
+}
+
+.contBusquedaResul {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
