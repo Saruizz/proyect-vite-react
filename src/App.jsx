@@ -15,6 +15,7 @@ import AgregarCategoria from './Components/Pages/admin/pagesAdmin/categorias/Agr
 import Perfil from './Components/Pages/admin/pagesAdmin/users/perfil/Perfil.jsx';
 import IniciarSesion from './Components/Pages/admin/pagesAdmin/users/iniciarSesion/IniciarSesion.jsx';
 import Politicas from './Components/Pages/politicas/Politicas.jsx';
+import Reserva from './Components/Pages/Reservas/Reserva.jsx';
 
 const App = () => {
 	return (
@@ -33,6 +34,7 @@ const App = () => {
 				<Route path='/perfil' element={<Perfil />} />
 				<Route path='/iniciarSesion' element={<IniciarSesion />} />
 				<Route path='/politicas' element={<Politicas />} />
+				<Route path='/reservas/:id' element={<Reserva />} />
 			</Routes>
 			<Footer />
 		</>
