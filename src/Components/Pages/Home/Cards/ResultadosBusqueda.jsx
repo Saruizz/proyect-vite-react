@@ -3,7 +3,7 @@ import React from 'react'
 const ResultadosBusqueda = ({data}) => {
   return (
     <div>
-      <h2>Resultados de Busqueda</h2>
+      <h2>Resultados de Búsqueda</h2>
       {data && (
         <ul>
           {data.map((item) => (

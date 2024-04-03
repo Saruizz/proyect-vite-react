@@ -53,3 +53,109 @@
     width: 31vw;
     margin: 5px;
 }
+
+/* CALENDARIO */
+
+.contCalendario {
+    margin-top: 2rem;
+    font-size: 18px;
+    display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+    padding: 2rem 5rem 2rem 5rem;
+    background-color: var(--verdeOscuro);
+    @media screen and (max-width: 1250px) {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 5rem 2rem 5rem;
+    }
+}
+
+.contSelecFechas {
+    display: flex;
+}
+
+.contImgCal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    
+}
+
+.contImgCal h3 {
+    color: var(--blanco);
+}
+
+.contCalendario img {
+    display: flex;
+    width: 10rem;
+    @media screen and (max-width: 1250px) {
+        width: 6rem;
+    }
+}
+
+.contenedorDisponibilidad {
+    display: flex;
+    margin: 2rem;
+}
+
+.fechas {
+    font-weight: bold;
+    color: var(--blanco);
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+}
+
+.fechas input {
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 5px;
+}
+
+.applyButton {
+	background-color: var(--verdeClaro);
+    border: none;
+    padding: 0.4rem 1rem;
+    width: 10rem;
+    color: var(--blanco);
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 20px
+}
+
+.applyButton:hover {
+    background-color: var(--verdeOscuro);
+}
+
+.botonAplicar {
+    display: flex;
+    justify-content: center;
+
+}
+
+/* Boton reservas */
+
+.btReservas {
+    display: flex;
+    justify-content: center;
+    color: var(--blanco);
+    font-family: "Poppins" ;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 130px;
+    background-color:var(--verdeClaro);
+    border: none;
+    box-shadow: 0 8px 8px -10px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    font-weight: 550;
+    margin-left: 0%;
+}
+
+.btReservas:hover {
+    background-color: var(--grisPlomo);
+}

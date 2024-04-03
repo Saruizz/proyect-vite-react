@@ -16,7 +16,7 @@ const Perfil = () => {
     const [userData, setUserData] = useState(null);
     // const [userData, setUserData] = useState(null);
 
-    const token = getToken(); console.log(token);
+    const token = getToken(); 
 
 
     useEffect(() => {

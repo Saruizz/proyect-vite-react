@@ -3,22 +3,29 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthContext';
 import { getToken } from '../../token/tokenService';
 import axios from 'axios';
+// import styles from '../DetalleProducto/Detalle.module.css';
+import '../DetalleProducto/CalendarioDetalle.css';
 import styles from './Reserva.module.css';
-import DetalleProducto from '../DetalleProducto/DetalleProducto';
-import CalendarioDetalle from '../DetalleProducto/CalendarioDetalle';
 import img from '../../../assets/img';
+import DetalleProductoReserva from '../DetalleProducto/DetalleProductoReserva';
+import CalendarioReservas from '../Reservas/CalendarioReservas';
 
 const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 	const { decode } = useContext(AuthContext);
 	const { id } = useParams();
-	const [fecha_entrega, setFechaEntrega] = useState('');
-	const [fecha_devolucion, setFechaDevolucion] = useState('');
+	const [fecha_entrega, setFechaEntrega] = useState(null);
+	const [fecha_devolucion, setFechaDevolucion] = useState(null);
 	const [metodoPago, setMetodoPago] = useState(1);
 	const [confirmacion, setConfirmacion] = useState('');
 	const [userData, setUserData] = useState(null);
 	const token = getToken();
 	const [car, setCar] = useState({ imagenes: [] });
-
+	const [selectedDates, setSelectedDates] = useState(null); // Nuevo estado para almacenar las fechas seleccionadas
+	const [range, setRange] = useState({
+		fechaEntregaDate: new Date(),
+		endDate: new Date(),
+		key: 'selection',
+	});
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -31,7 +38,7 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 					{ correoElectronico: decode.email },
 					{ headers },
 				);
-				console.log(response.data);
+				// console.log(response.data);
 				setUserData(response.data);
 			} catch (error) {
 				console.error('Error fetching user data:', error);
@@ -77,6 +84,23 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 			} else {
 				setConfirmacion('Hubo un error al confirmar la reserva.');
 			}
+
+			if (range[0]?.startDate != null && range[0]?.endDate != null) {
+				// Obtener el año, mes y día
+				const year = range[0].startDate.getFullYear();
+				const month = range[0].startDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+				const day = range[0].startDate.getDate();
+
+				// Formatear la fecha en el formato "YYYY-MM-DD"
+				const fecha_entrega = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+				const year1 = range[0].endDate.getFullYear();
+				const month1 = range[0].endDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+				const day1 = range[0].endDate.getDate();
+
+				// Formatear la fecha en el formato "YYYY-MM-DD"
+				const fecha_devolucion = `${year1}-${month1.toString().padStart(2, '0')}-${day1.toString().padStart(2, '0')}`;
+			}
 		} catch (error) {
 			console.error('Error al realizar la reserva:', error);
 			setConfirmacion('Hubo un error al confirmar la reserva.');
@@ -87,68 +111,22 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 		navigate(-1);
 	};
 
+	const handleApplyDates = e => {
+		e.preventDefault();
+
+		if (selectedDates) {
+			setFechaEntrega(selectedDates.startDate);
+			setFechaDevolucion(selectedDates.endDate);
+		}
+	};
+
 	return (
 		<div className={styles.reserva}>
 			<h2>Detalle del Vehículo</h2>
 
-			<div className={styles.appDetalle}>
-				{/*car.imagenes.map((imagen, index) => (
-				<img key={index} src={imagen.url} alt={Imagen ${index + 1}} />
-			))*/}
-				<div className={styles.contNombreCarro}>
-					<h2>{car.nombre}</h2>
-					<img
-						className={styles.imgVover}
-						src={img.volver}
-						alt='Volver'
-						onClick={handleGoBack}
-					/>
-				</div>
-				<div className={styles.contFotosGeneral}>
-					<div className={styles.contFotos}>
-						<div className={styles.contFotoPrincipal}>
-							<img src={car.imagenes.length > 0 ? car.imagenes[0].url : ''} />
-						</div>
-						<div className={styles.contFotosSeg}>
-							<div className={styles.fotosSeg}>
-								<div className={styles.fotosSegIndividual}>
-									<img
-										src={car.imagenes.length > 0 ? car.imagenes[1].url : ''}
-									/>
-								</div>
-								<div className={styles.fotosSegIndividual}>
-									<img
-										src={car.imagenes.length > 0 ? car.imagenes[2].url : ''}
-									/>
-								</div>
-							</div>
-							<div className={styles.fotosSeg}>
-								<div className={styles.fotosSegIndividual}>
-									<img
-										src={car.imagenes.length > 0 ? car.imagenes[3].url : ''}
-									/>
-								</div>
-								<div className={styles.fotosSegIndividual}>
-									<img
-										src={car.imagenes.length > 0 ? car.imagenes[4].url : ''}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className={styles.contBtn}>
-					<button className={styles.btnVerMas}>Ver más</button>
-				</div>
-				<div className={styles.contDescripcion}>
-					<span>{car.descripcion}</span>
-				</div>
-				<div className={styles.contCaracteristicas}>
-					<div>
-						<h3>Características</h3>
-					</div>
-				</div>
+			{/* Reemplace el codigo anterior por el llamado al componente */}
+			<div>
+				<DetalleProductoReserva />
 			</div>
 
 			<h2 className={styles.titulo}>Tu reserva</h2>
@@ -180,24 +158,64 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 			</div>
 
 			<form onSubmit={handleReserva}>
-				<h2>Seleccionar Fechas</h2>
-				{/* */} <CalendarioDetalle vehiculoId={id} />
-				<label>Fecha de Entrega:</label>
-				<input
-					type='date'
-					value={fecha_entrega}
-					onChange={e => setFechaEntrega(e.target.value)}
-				/>
-				<br />
-				<label>Fecha de Devolución:</label>
-				<input
-					type='date'
-					value={fecha_devolucion}
-					onChange={e => {
-						setFechaDevolucion(e.target.value);
-					}}
-				/>
-				<br />
+				<div className={styles.contCalendario}>
+				<div>
+						<div>
+							<CalendarioReservas
+								vehiculoId={id}
+								onDatesSelect={({ startDate, endDate }) =>
+									setSelectedDates({ startDate, endDate })
+								}
+							/>
+						</div>
+						<div className={styles.botonAplicar}>
+							<button className={styles.applyButton} onClick={handleApplyDates}>
+								Aplicar
+							</button>
+						</div>
+					</div>
+					<div className={styles.contImgCal}>
+						<h3>Selección de rango de fechas</h3>
+						<img src={img.calendario} />
+						<div className={styles.contenedorDisponibilidad}>
+							<div className={styles.fechas}>
+								<label htmlFor='fecha_entrega' className={styles.labelFecha}>
+									Recogida
+								</label>
+								<input
+									type='text'
+									id='fecha_entrega'
+									className={styles.labelFecha}
+									value={
+										fecha_entrega ? fecha_entrega.toLocaleDateString() : ''
+									}
+									readOnly
+								/>
+							</div>
+							<div className={styles.fechas}>
+								<label
+									htmlFor='fecha_devolucion '
+									className={styles.labelFecha}
+								>
+									Devolución
+								</label>
+								<input
+									type='text'
+									id='fecha_devolucion '
+									className={styles.inputFecha}
+									value={
+										fecha_devolucion
+											? fecha_devolucion.toLocaleDateString()
+											: ''
+									}
+									readOnly
+								/>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
 				<h2>Elegir Método de Pago</h2>
 				<select
 					value={metodoPago}

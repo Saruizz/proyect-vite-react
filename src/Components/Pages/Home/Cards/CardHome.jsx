@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 import BotonReservas from '../../Reservas/BotonReservas';
 import Swal from 'sweetalert2';
 
-const CardHome = ({ id }) => {
+const CardHome = () => {
 	const [carInfo, setCarInfo] = useState([]);
 	const [favorites, setFavorites] = useState([]);
+	const { id } = useParams();
 
 	useEffect(() => {
 		axios.get('http://localhost:8081/vehiculos/aleatorios').then(res => {
@@ -67,7 +69,7 @@ const CardHome = ({ id }) => {
 							</div>
 							<div className={styles.botones}>
 								<div className={styles.contLink}>
-									<BotonReservas />
+									<BotonReservas vehiculoId={carInfo.id}/>
 								</div>
 								<div className={styles.contLink}>
 									<Link

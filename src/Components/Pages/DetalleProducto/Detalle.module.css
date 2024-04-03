@@ -125,10 +125,11 @@
     @media screen and (max-width: 700px) {
             justify-content: center;
         }
+
 }
 
 .btnVerMas {    
-    padding: 0.2rem 2rem;
+    padding: 0.5rem 2rem;
     background-color: var(--verdeClaro);
     color: var(--blanco);
     font-size: 16px;
@@ -146,7 +147,9 @@
     border: 1px solid var(--verdeOscuro);
 }
 
-
+.contBtnReservar {
+    margin-top: 1rem;
+}
 
 /*DESCRIPCION*/
 

@@ -3,10 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Detalle.module.css';
 import img from '../../../assets/img';
-import CalendarioDetalle from './CalendarioDetalle';
-import BotonReservas from '../Reservas/BotonReservas';
 
-const DetalleProducto = () => {
+const DetalleProductoReserva = () => {
 	const [car, setCar] = useState({ imagenes: [] });
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -60,7 +58,7 @@ const DetalleProducto = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles.contBtn}>
+			<div className={styles.contBtn} >
 				<div className={styles.contBtn}>
 					<button className={styles.btnVerMas}>Ver más</button>
 				</div>
@@ -87,18 +85,9 @@ const DetalleProducto = () => {
 					</li>
 				</ul>
 			</div>
-			<div className={styles.contCalendario}>
-				<div className={styles.contImgCal}>
-					<img src={img.calendario} />
-					<h3>Disponibilidad</h3>
-					<div className={styles.contBtnReservar}>
-						<BotonReservas vehiculoId={id} />
-					</div>
-				</div>
-				<CalendarioDetalle vehiculoId={id} />
-			</div>
+			
 		</div>
 	);
 };
 
-export default DetalleProducto;
+export default DetalleProductoReserva;
