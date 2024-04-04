@@ -24,8 +24,8 @@ const DetalleProductoReserva = () => {
 			{/*car.imagenes.map((imagen, index) => (
 				<img key={index} src={imagen.url} alt={`Imagen ${index + 1}`} />
 			))*/}
-			<div className={styles.contNombreCarro}>
-				<h2>{car.nombre}</h2>
+			<div style={{ background: '#43BE32' }} className={styles.contNombreCarro}>
+				<h2 style={{ color: 'white' }}>¡Reserva tu{car.nombre}!</h2>
 				<img
 					className={styles.imgVover}
 					src={img.volver}
@@ -58,7 +58,7 @@ const DetalleProductoReserva = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles.contBtn} >
+			<div className={styles.contBtn}>
 				<div className={styles.contBtn}>
 					<button className={styles.btnVerMas}>Ver más</button>
 				</div>
@@ -85,7 +85,6 @@ const DetalleProductoReserva = () => {
 					</li>
 				</ul>
 			</div>
-			
 		</div>
 	);
 };

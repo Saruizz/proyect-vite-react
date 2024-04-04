@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthContext';
 import { getToken } from '../../token/tokenService';
 import axios from 'axios';
@@ -122,9 +122,6 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 
 	return (
 		<div className={styles.reserva}>
-			<h2>Detalle del Vehículo</h2>
-
-			{/* Reemplace el codigo anterior por el llamado al componente */}
 			<div>
 				<DetalleProductoReserva />
 			</div>
@@ -159,7 +156,7 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 
 			<form onSubmit={handleReserva}>
 				<div className={styles.contCalendario}>
-				<div>
+					<div>
 						<div>
 							<CalendarioReservas
 								vehiculoId={id}
@@ -213,7 +210,6 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 							</div>
 						</div>
 					</div>
-					
 				</div>
 
 				<h2>Elegir Método de Pago</h2>

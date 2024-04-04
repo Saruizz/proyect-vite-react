@@ -1,6 +1,6 @@
 .reserva {
-    margin-top: 15vh;
     margin-bottom: 15vh;
+    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;

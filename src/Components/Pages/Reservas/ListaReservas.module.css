@@ -1,0 +1,76 @@
+.appListaReservas {
+    width: 100vw;
+    min-height: 84.1vh;
+    padding-top: 83.03px;
+    background-color: var(--blanco);
+    
+
+    @media screen and (max-width: 1200px) {
+        padding-top: 66.09px;
+    }
+
+    .divTabla {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .divh2 {
+        margin-top: 3rem;
+        display: flex;
+        width: 60vw;
+    }
+
+    .trTable {
+        height: 50px;
+        background-color: #EFEEEE;
+        border-bottom: 4px solid #43BE32;
+    }
+
+    .table {
+        border-collapse: collapse;
+        width: 60vw;
+    }
+
+    .nombreList {
+        text-align: center;
+        color: var(--verdeOscuro);
+        font-weight: 500;
+    }
+
+    .fechas {
+        text-align: center;
+        color: var(--verdeOscuro);
+        font-weight: 500;
+    }
+
+    .contbrn {
+        text-align: center;
+    }
+
+    .btnCancel {
+        border-radius: 7px;
+        background-color: var(--verdeOscuro);
+        border: none;
+        height: 40px;
+        width: 170px;
+        color: white;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .btnCancel:hover {
+        background-color: var(--verdeClaro);
+    }
+
+
+    @media screen and (max-width: 930px) {
+        padding-top: 61.98px;
+    }
+
+    .contTitulo {
+        display: flex;
+        gap: 2rem;
+    }
+}

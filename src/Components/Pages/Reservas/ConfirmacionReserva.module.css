@@ -1,0 +1,75 @@
+.appConfReserva {
+    width: 100vw;
+    min-height: 84.1vh;
+    padding-top: 83.03px;
+    background-color: var(--blanco);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @media screen and (max-width: 1200px) {
+        padding-top: 66.09px;
+    }
+}
+
+.appConfReserva h1 {
+    color: var(--verdeClaro);
+    margin-bottom: 6rem;
+}
+
+.appConfReserva span {
+    color: var(--verdeOscuro);
+    margin-bottom: 1rem;
+    font-size: 22px;
+}
+
+.appConfReserva p {
+    color: var(--grisPlomo);
+    margin-bottom: 6rem;
+    font-size: 20px;
+}
+
+.contLinks {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.btnCancel {
+    padding: 0.5rem 3rem;
+    background-color: var(--verdeClaro);
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: 550;
+    text-decoration: none;
+    border: 1px solid var(--verdeClaro);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btnCancel:hover {
+    color: #fff;
+    background-color: var(--verdeOscuro);
+    border: 1px solid var(--verdeOscuro);
+}
+
+.btnNav {
+    padding: 0.5rem 3rem;
+    background-color: var(--verdeOscuro);
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: 550;
+    text-decoration: none;
+    border: 1px solid var(--verdeOscuro);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btnNav:hover {
+    color: #fff;
+    background-color: var(--verdeClaro);
+    border: 1px solid var(--verdeClaro);
+}
