@@ -10,7 +10,7 @@ const AgregarProducto = () => {
 	const [info, setInfo] = useState('');
 	const [nombre, setNombre] = useState('');
 	const [descripcion, setDescripcion] = useState('');
-	const [imagenes, setImagenes] = useState([]);
+	const [imagenes, setImagenes] = useState('');
 	const [selectedOption, setSelectedOption] = useState('');
 	const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -88,6 +88,7 @@ const AgregarProducto = () => {
       setNombre('');
       setDescripcion('');
       setSelectedOption('');
+      setImagenes('');
     } catch (error) {
       // Manejar el error
       Swal.fire("Error al agregar producto", error.message, "error");
@@ -143,6 +144,7 @@ const AgregarProducto = () => {
             <input
               type='text'
               id='imagenes'
+              value={imagenes}
               onChange={handleImagenesChange}
               required
             />

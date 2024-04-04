@@ -55,6 +55,7 @@ const AgregarCategoria = () => {
 			Swal.fire('¡Categoria agregada exitosamente!', '', 'success');
 			setTitulo('');
 			setDescripcion('');
+			setImagen('');
 		} catch (error) {
 			// Manejar el error
 			Swal.fire('Error al agregar categoria', error.message, 'error');
