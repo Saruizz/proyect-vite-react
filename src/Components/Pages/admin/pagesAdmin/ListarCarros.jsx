@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getToken } from '../../../token/tokenService';
 import styles from './ListarCarros.module.css';
+import { useNavigate } from 'react-router-dom';
+import img from '../../../../assets/img';
 
 const CarList = () => {
 	const [users, setUsers] = useState([{ imagenes: [] }]);
+	const navigate = useNavigate();
+	const handleGoBack = () => {
+		navigate(-1);
+	};
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -57,7 +63,15 @@ const CarList = () => {
 
 	return (
 		<div className={styles.appListarCarros}>
-			<h2>Lista de carros</h2>
+			<div className={styles.contTitulo}>
+				<img
+					className={styles.imgVover}
+					src={img.volver}
+					alt='Volver'
+					onClick={handleGoBack}
+				/>
+				<h1>Lista de productos</h1>
+			</div>
 			<table class={styles.table}>
 				<thead>
 					<tr class={styles.trTable}>

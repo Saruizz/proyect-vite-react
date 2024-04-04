@@ -14,3 +14,24 @@
     text-align: center;
     font-weight: bold;
 }
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 84.1vh;
+    padding-top: 83.03px;
+    @media screen and (max-width: 1200px) {
+        padding-top: 66.09px;
+    }
+    @media screen and (max-width: 930px) {
+        padding-top: 61.98px;
+    }
+}
+
+.notFound p {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--grisPlomo);
+}

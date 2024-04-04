@@ -19,7 +19,7 @@ const CrearCuenta = () => {
 		nombre: /^[a-zA-Záéíóúñ\s]{3,40}$/, // Letras y espacios, mínimo 3 caracteres
 		apellido: /^[a-zA-Záéíóúñ\s]{3,40}$/, // Letras y espacios, mínimo 3 caracteres
 		correoElectronico: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-		contrasenia: /^.{8,20}$/, // Al menos 8 caracteres
+		contrasenia: /^.{6,20}$/, // Al menos 6 caracteres
 	};
 
 	/*
@@ -71,7 +71,7 @@ const CrearCuenta = () => {
 		}
 
 		axios
-			.post('http://localhost:8081/registro', {
+			.post('http://localhost:8081/usuarios/registro', {
 				nombre: nombre,
 				apellido: apellido,
 				correoElectronico: correoElectronico,
@@ -80,7 +80,7 @@ const CrearCuenta = () => {
 			.then(response => {
 				console.log('Formulario enviado correctamente');
 				console.log(response.data);
-				Swal.fire('¡Producto agregado exitosamente!', '', 'success');
+				Swal.fire('¡Usuario agregado exitosamente!', '', 'success');
 				navigate('/'); // Redirigir al usuario a la página de perfil u otra página después de registrar usuario
 			})
 			.catch(error => {
@@ -96,8 +96,8 @@ const CrearCuenta = () => {
 	return (
 		<div className={styles.appCrearUsuario}>
 			<img src={img.isoLogoA2} alt='' />
-
 			<form className={styles.contForm} onSubmit={handleSubmit}>
+			<h2>Crear cuenta</h2>
 				<div className={styles.contNombreApellido}>
 					<div className={styles.contInpNom}>
 						<label htmlFor='nombre'>Nombre:</label>
@@ -152,7 +152,7 @@ const CrearCuenta = () => {
 				</div>
 
 				<div className={styles.contInp}>
-					<label htmlFor='confirmarContrasenia'>Confirmar contrasenia:</label>
+					<label htmlFor='confirmarContrasenia'>Confirmar contraseña:</label>
 					<input
 						type='password'
 						id='confirmarContrasenia'

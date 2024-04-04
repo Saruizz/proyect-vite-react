@@ -4,6 +4,7 @@ import styles from './AgregarProducto.module.css';
 import img from '../../../../../assets/img';
 import Swal from 'sweetalert2';
 import { getToken } from '../../../../token/tokenService';
+import { useNavigate } from 'react-router-dom';
 
 const AgregarProducto = () => {
 	const [info, setInfo] = useState('');
@@ -12,6 +13,10 @@ const AgregarProducto = () => {
 	const [imagenes, setImagenes] = useState([]);
 	const [selectedOption, setSelectedOption] = useState('');
 	const [error, setError] = useState('');
+  const navigate = useNavigate();
+	const handleGoBack = () => {
+		navigate(-1);
+	};
 
 	useEffect(() => {
 		axios.get('http://localhost:8081/vehiculos/listar').then(res => {
@@ -91,7 +96,15 @@ const AgregarProducto = () => {
 
   return (
     <div className={styles.agregar}>
-      <h1>Agregar Producto</h1>
+      <div className={styles.contTitulo}>
+				<img
+					className={styles.imgVover}
+					src={img.volver}
+					alt='Volver'
+					onClick={handleGoBack}
+				/>
+        <h1>Agregar Producto</h1>
+      </div>
       {error && window.alert(error)}
       <form onSubmit={handleSubmit} className={styles.form}>
         <span className={styles.contenedor}>
@@ -137,6 +150,7 @@ const AgregarProducto = () => {
           <button className={styles.btSubmit} type='submit'>
             Agregar
           </button>
+          
         </span>
       </form>
     </div>

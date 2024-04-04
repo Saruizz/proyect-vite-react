@@ -67,4 +67,9 @@
     @media screen and (max-width: 930px) {
         padding-top: 61.98px;
     }
+
+    .contTitulo {
+        display: flex;
+        gap: 2rem;
+    }
 }

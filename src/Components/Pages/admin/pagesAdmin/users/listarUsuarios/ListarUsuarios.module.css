@@ -78,3 +78,8 @@
     justify-content: center;
     align-items: center;
 }
+
+.contTitulo {
+    display: flex;
+    gap: 2rem;
+}

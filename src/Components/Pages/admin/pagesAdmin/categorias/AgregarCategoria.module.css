@@ -110,3 +110,7 @@
     padding: 15px 25px;
 }
 
+.contTitulo {
+    display: flex;
+    gap: 2rem;
+}

@@ -4,12 +4,15 @@ import styles from './AgregarCategoria.module.css';
 import img from '../../../../../assets/img';
 import Swal from 'sweetalert2';
 import { getToken } from '../../../../token/tokenService';
+import { useNavigate } from 'react-router-dom';
 
 const AgregarCategoria = () => {
 	const [titulo, setTitulo] = useState('');
 	const [descripcion, setDescripcion] = useState('');
 	const [imagen, setImagen] = useState('');
-
+	const handleGoBack = () => {
+		navigate(-1);
+	};
 
 	const handleTituloChange = e => {
 		setTitulo(e.target.value);
@@ -20,48 +23,56 @@ const AgregarCategoria = () => {
 	};
 
 	const handleImagenChange = e => {
-		setImagen(e.target.value)
+		setImagen(e.target.value);
 	};
 
-
-	const handleSubmit = async (e) => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 
 		try {
 			const playload = {
-			  titulo: titulo,
-			  descripcion: descripcion,
-			  urlImagen :imagen
+				titulo: titulo,
+				descripcion: descripcion,
+				urlImagen: imagen,
 			};
-		
+
 			const token = getToken();
-		
+
 			const response = await fetch('http://localhost:8081/categorias/agregar', {
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
-			  },
-			  body: JSON.stringify(playload)
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(playload),
 			});
-		
+
 			if (!response.ok) {
-			  throw new Error('Error al agregar categoria');
+				throw new Error('Error al agregar categoria');
 			}
-		
+
 			// Manejar la respuesta exitosa
-			Swal.fire("¡Categoria agregada exitosamente!", "", "success");
+			Swal.fire('¡Categoria agregada exitosamente!', '', 'success');
 			setTitulo('');
 			setDescripcion('');
-		  } catch (error) {
+		} catch (error) {
 			// Manejar el error
-			Swal.fire("Error al agregar categoria", error.message, "error");
-		  }
+			Swal.fire('Error al agregar categoria', error.message, 'error');
+		}
 	};
 
 	return (
 		<div className={styles.categoria}>
-			<h1>Agregar categoría</h1>
+			<div className={styles.contTitulo}>
+				<img
+					className={styles.imgVover}
+					src={img.volver}
+					alt='Volver'
+					onClick={handleGoBack}
+				/>
+				<h1>Agregar categoría</h1>
+			</div>
+			
 			<form onSubmit={handleSubmit}>
 				<span className={styles.contCategoria}>
 					<img src={img.isoLogoB2} width={300} />
@@ -89,11 +100,12 @@ const AgregarCategoria = () => {
 				<span className={styles.contCategoria}>
 					<div className={styles.fileInput}>
 						<label htmlFor='imagenes'>Agregar URL</label>
-						<input 
-						type='text' 
-						id='imagen' 
-						onChange={handleImagenChange}
-						required />
+						<input
+							type='text'
+							id='imagen'
+							onChange={handleImagenChange}
+							required
+						/>
 					</div>
 					<button className={styles.buttonSubmit} type='submit'>
 						Agregar
