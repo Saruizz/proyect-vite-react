@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../../../../../token/tokenService';
 
 const CrearCuenta = () => {
 	const [nombre, setNombre] = useState('');
@@ -14,6 +15,7 @@ const CrearCuenta = () => {
 	const [errores, setErrores] = useState([]);
 	const [passwordConfirmed, setPasswordConfirmed] = useState(false);
 	const navigate = useNavigate();
+	const token = getToken();
 
 	const expresiones = {
 		nombre: /^[a-zA-Záéíóúñ\s]{3,40}$/, // Letras y espacios, mínimo 3 caracteres
@@ -70,6 +72,34 @@ const CrearCuenta = () => {
 			setErrores(erroresValidacion);
 		}
 
+		try {
+			const headers = {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			};
+
+			const response = await axios.post(
+				'http://localhost:8081/registro',
+				{
+					nombre: nombre,
+					apellido: apellido,
+					correoElectronico: correoElectronico,
+					contrasenia: contrasenia,
+				},
+				{ headers },
+			);
+			console.log(response.data);
+			Swal.fire('¡Producto agregado exitosamente!', '', 'success');
+			//navigate('/'); // Redirigir al usuario a la página de perfil u otra página después de registrar usuario
+		} catch (error) {
+			console.error('Error al realizar la registro:', error);
+			Swal.fire({
+				icon: 'error',
+				title: 'Error al registrarse',
+				text: erroresValidacion.join('\n'),
+			});
+		}
+		/*
 		axios
 			.post('http://localhost:8081/registro', {
 				nombre: nombre,
@@ -91,6 +121,7 @@ const CrearCuenta = () => {
 					text: erroresValidacion.join('\n'),
 				});
 			});
+		*/
 	}
 
 	return (
