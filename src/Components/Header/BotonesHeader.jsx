@@ -16,8 +16,8 @@ const BotonesHeader = () => {
         // Esto se ejecutará cada vez que decode cambie
         console.log('Nuevo valor de decode:', decode);
         console.log('Nuevo valor de data:',data);
-
         setMenuOpen(false); // Cierra el menú cuando decode cambie
+        
     }, [decode]); // Ejecutar el efecto cuando decode cambie
 
     const toggleMenu = () => {

@@ -37,6 +37,9 @@ const Perfil = () => {
 
                 setUserData(response.data);
                 updateUserData(response.data[0]);
+
+                // Guardar userData en el localStorage
+                // localStorage.setItem('userData', JSON.stringify(response.data[0]));
             } catch (error) {
                 console.error('Error fetching data:', error);
                
