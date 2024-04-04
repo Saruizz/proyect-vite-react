@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, { useState } from 'react';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 import BotonReservas from '../../Reservas/BotonReservas';
@@ -26,6 +26,17 @@ const ResultadosBusqueda = ({ data }) => {
 				title: 'Agregado a favoritos',
 				text: 'El vehiculo ha sido agregado a tus favoritos',
 			});
+		} else {
+			const indexToRemove = updatedFavorites.findIndex(fav => fav === car);
+			if (indexToRemove !== -1) {
+				updatedFavorites.splice(indexToRemove, 1);
+				setFavorites(updatedFavorites);
+				Swal.fire({
+					icon: 'success',
+					title: 'Eliminado de favoritos',
+					text: 'El vehiculo ha sido eliminado de tus favoritos',
+				});
+			}
 		}
 	};
 	return (
@@ -37,14 +48,6 @@ const ResultadosBusqueda = ({ data }) => {
 						// <li key={item.id}>{item.nombre}</li> // Ejemplo de renderización de items
 						<div className={styles.card} key={item.id}>
 							<span className={styles.datos}>
-								<div className={styles.contLink}>
-									<button
-										className={styles.btCardFav}
-										onClick={() => addToFavorites(index)}
-									>
-										🖤
-									</button>
-								</div>
 								<img
 									className={styles.automovil}
 									src={item.imagenes.length > 0 ? item.imagenes[0].url : ''}
@@ -52,6 +55,14 @@ const ResultadosBusqueda = ({ data }) => {
 								/>
 							</span>
 							<span className={styles.datos}>
+								<div className={styles.contFavoritos}>
+								<button
+								className={`${styles.btCardFav} ${favorites.includes(item) ? styles.favorito : ''}`}
+								onClick={() => addToFavorites(index)}
+							>
+								{favorites.includes(item) ? '❤️' : '🖤'}
+							</button>
+								</div>
 								<h2>{item.nombre}</h2>
 								<div>
 									<div>

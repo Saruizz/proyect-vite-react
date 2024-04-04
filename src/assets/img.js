@@ -13,6 +13,7 @@ import iconoVer from './iconosCardsPages/iconoVer.svg';
 import iconoWifi from './iconosCardsPages/iconoWifi.svg';
 import tipoElectrico from './iconosCardsPages/tipoElectrico.svg';
 import tipoHibrido from './iconosCardsPages/tipoHibrido.svg';
+import favorito from './iconosCardsPages/favorito.svg'
 
 /* Logos */
 
@@ -60,6 +61,7 @@ export default {
     'iconoWifi': iconoWifi,
     'tipoElectrico': tipoElectrico,
     'tipoHibrido': tipoHibrido,
+    'favorito': favorito,
 
     /* Logos */
 
