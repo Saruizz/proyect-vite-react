@@ -72,8 +72,6 @@
     box-shadow: 0 0 0.5px var(--grisClaro);
 }
 
-<<<<<<< HEAD
-=======
 .selcategorias {
     width: 80%;
     border-radius: 10px;
@@ -85,7 +83,6 @@
 .fileInput input[type='file'] {
     display: none;
 }
->>>>>>> aa4f3e32a9273bf9bdebd02eedacd90a400bb37a
 
 .fileInput {
     display: flex;
@@ -127,4 +124,9 @@
     font-family: "Poppins" ;
     font-weight: bold;
     padding: 15px 25px;
+}
+
+.contTitulo {
+    display: flex;
+    gap: 2rem;
 }

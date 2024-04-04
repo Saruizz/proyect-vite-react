@@ -13,6 +13,7 @@ const FormularioBusqueda = ({ funciones }) => {
 	const [vehiculos, setVehiculos] = useState([]);
 	const [open, setOpen] = useState(false);
 	const refOne = useRef(null);
+	const [formularioLimpio, setFormularioLimpio] = useState(true);
 	const [placeholderText, setPlaceholderText] = useState(
 		'Fecha de entrega - Fecha de devolución',
 	);
@@ -35,6 +36,7 @@ const FormularioBusqueda = ({ funciones }) => {
 
 	const handleConsultaChange = e => {
 		setConsulta(e.target.value);
+		setFormularioLimpio(false); 
 	};
 
 	const handleRangeChange = newRange => {
@@ -45,6 +47,7 @@ const FormularioBusqueda = ({ funciones }) => {
 				'yyyy-MM-dd',
 			)}`,
 		);
+		setFormularioLimpio(false); 
 	};
 
 	const handleCheckboxChange = id => {
@@ -53,6 +56,7 @@ const FormularioBusqueda = ({ funciones }) => {
 				opcion.id === id ? { ...opcion, checked: !opcion.checked } : opcion,
 			),
 		);
+		setFormularioLimpio(false); 
 	};
 
 	const handleSubmit = async e => {
@@ -72,7 +76,7 @@ const FormularioBusqueda = ({ funciones }) => {
 					categoria.push(categories[i].id);
 				}
 			}
-			payload.categoria = categoria
+			payload.categoria = categoria;
 		}
 
 		if (range[0]?.startDate != null && range[0]?.endDate != null) {
@@ -90,15 +94,14 @@ const FormularioBusqueda = ({ funciones }) => {
 
 			// Formatear la fecha en el formato "YYYY-MM-DD"
 			const fechaFinal = `${year1}-${month1.toString().padStart(2, '0')}-${day1.toString().padStart(2, '0')}`;
-		
+
 			payload.fechaInicial = fechaInicial;
 			payload.fechaFinal = fechaFinal;
 		}
 
-		if(consulta != ''){
+		if (consulta != '') {
 			payload.consulta = consulta;
 		}
-		
 
 		console.log(payload);
 
@@ -118,12 +121,26 @@ const FormularioBusqueda = ({ funciones }) => {
 
 			const data = await response.json();
 			console.log(data);
-			funciones.onRealizarBusqueda(data); 
+			funciones.onRealizarBusqueda(data);
 		} catch (error) {
 			console.error('Error al realizar la búsqueda:', error);
-		};
+		}
 
 		// Llama a la función de Home para mostrar los resultados
+	};
+
+	const limpiarFormulario = () => {
+		setRange([
+			{
+				key: 'selection',
+			},
+		]);
+		setCategories(
+			categories.map(categoria => ({ ...categoria, checked: false })),
+		);
+		setConsulta('');
+		setPlaceholderText('Fecha de entrega - Fecha de devolución')
+		setFormularioLimpio(true);
 	};
 
 	return (
@@ -166,6 +183,7 @@ const FormularioBusqueda = ({ funciones }) => {
 										editableDateInputs={true}
 										moveRangeOnFirstSelection={false}
 										ranges={range}
+										rangeColors={['#43BE32']}
 										months={2}
 										direction='horizontal'
 										className={styles.calendarElement}
@@ -182,9 +200,19 @@ const FormularioBusqueda = ({ funciones }) => {
 							)}
 						</div>
 					</div>
-					<button className={styles.btBusqueda} type='submit'>
-						Realizar búsqueda
-					</button>
+					<div className={styles.botonesBusqueda}>
+						<button className={styles.btBusqueda} type='submit'>
+							Realizar búsqueda
+						</button>
+						<button
+							className={styles.btLimpiar}
+							type='button'
+							onClick={limpiarFormulario}
+							disabled={formularioLimpio}
+						>
+							Limpiar campos
+						</button>
+					</div>
 				</form>
 			</div>
 			<img src={img.isoLogoC2} />
