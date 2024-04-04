@@ -113,3 +113,20 @@
     margin-top: 1rem;
     margin-bottom: 3rem;
 }
+
+.btCardFav {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: black;
+  }
+  
+  .favorito {
+    color: red; /* Cambia el color del corazón cuando está en favoritos */
+  }
+
+  .contFavoritos {
+    display: flex;
+    justify-content: flex-end;
+  }

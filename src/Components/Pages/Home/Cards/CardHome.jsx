@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './CardHome.module.css';
 import { Link } from 'react-router-dom';
 import BotonReservas from '../../Reservas/BotonReservas';
 import Swal from 'sweetalert2';
+import img from '../../../../assets/img';
 
 const CardHome = () => {
 	const [carInfo, setCarInfo] = useState([]);
@@ -30,7 +31,17 @@ const CardHome = () => {
 				title: 'Agregado a favoritos',
 				text: 'El vehiculo ha sido agregado a tus favoritos',
 			});
-		}
+		} else {
+			const indexToRemove = updatedFavorites.findIndex(fav => fav === car);
+			if (indexToRemove !== -1) {
+			  updatedFavorites.splice(indexToRemove, 1);
+			  setFavorites(updatedFavorites);
+			  Swal.fire({
+				icon: 'success',
+				title: 'Eliminado de favoritos',
+				text: 'El vehiculo ha sido eliminado de tus favoritos',
+			});
+			}}
 	};
 
 	const handleCardClick = id => {
@@ -43,17 +54,9 @@ const CardHome = () => {
 
 	return (
 		<div className={styles.home}>
-			{carInfo.map((carInfo, index)=> (
+			{carInfo.map((carInfo, index) => (
 				<div className={styles.card} key={carInfo.id}>
 					<span className={styles.datos}>
-						<div className={styles.contLink}>
-							<button
-								className={styles.btCardFav}
-								onClick={() => addToFavorites(index)}
-							>
-								🖤
-							</button>
-						</div>
 						<img
 							className={styles.automovil}
 							src={carInfo.imagenes.length > 0 ? carInfo.imagenes[0].url : ''}
@@ -61,6 +64,14 @@ const CardHome = () => {
 						/>
 					</span>
 					<span className={styles.datos}>
+						<div className={styles.contFavoritos}>
+							<button
+								className={`${styles.btCardFav} ${favorites.includes(carInfo) ? styles.favorito : ''}`}
+								onClick={() => addToFavorites(index)}
+							>
+								{favorites.includes(carInfo) ? '❤️' : '🖤'}
+							</button>
+						</div>
 						<h2>{carInfo.nombre}</h2> {/*nombre*/}
 						<div>
 							<div>
@@ -69,7 +80,7 @@ const CardHome = () => {
 							</div>
 							<div className={styles.botones}>
 								<div className={styles.contLink}>
-									<BotonReservas vehiculoId={carInfo.id}/>
+									<BotonReservas vehiculoId={carInfo.id} />
 								</div>
 								<div className={styles.contLink}>
 									<Link
