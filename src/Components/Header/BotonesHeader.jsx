@@ -15,6 +15,19 @@ const BotonesHeader = () => {
 		// Esto se ejecutará cada vez que decode cambie
 		console.log('Nuevo valor de decode:', decode);
 		console.log('Nuevo valor de data:', data);
+		// Agregar un evento de clic al documento para cerrar el menú
+		const handleClickOutside = event => {
+			if (!event.target.closest('.botonesHeader')) {
+				setMenuOpen(false);
+			}
+		};
+
+		document.addEventListener('click', handleClickOutside);
+		// Eliminar el evento de clic al desmontar el componente
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+		};
+
 		setMenuOpen(false); // Cierra el menú cuando decode cambie
 	}, [decode]); // Ejecutar el efecto cuando decode cambie
 
@@ -89,21 +102,41 @@ const BotonesHeader = () => {
 								<div
 									className={`${styles.menuPrincipal} ${userData ? styles.menuPrincipalCompleto : ''}`}
 								>
-									<Link className={styles.optionMenu} to={'/'}>
+									<Link
+										className={styles.optionMenu}
+										to={'/'}
+										onClick={toggleMenu}
+									>
 										Home
 									</Link>
-									<Link className={styles.optionMenu} to={'/perfil'}>
+									<Link
+										className={styles.optionMenu}
+										to={'/perfil'}
+										onClick={toggleMenu}
+									>
 										Información Personal
 									</Link>
 									{decode.isAdmin && (
-										<Link className={styles.optionMenu} to={'/administracion'}>
+										<Link
+											className={styles.optionMenu}
+											to={'/administracion'}
+											onClick={toggleMenu}
+										>
 											Panel Administración
 										</Link>
 									)}
-									<Link className={styles.optionMenu} to={'/favoritos'}>
+									<Link
+										className={styles.optionMenu}
+										to={'/favoritos'}
+										onClick={toggleMenu}
+									>
 										Lista de favoritos
 									</Link>
-									<Link className={styles.optionMenu} to={'/listaReservas'}>
+									<Link
+										className={styles.optionMenu}
+										to={'/listaReservas'}
+										onClick={toggleMenu}
+									>
 										Lista de reservas
 									</Link>
 									<Link

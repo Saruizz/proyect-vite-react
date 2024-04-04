@@ -7,18 +7,36 @@
     min-height: 84.1vh;
 }
 
+.tuReservaContainer {
+    background-color: var(--verdeOscuro);
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra horizontalmente */
+    justify-content: center;
+    /* Centra verticalmente */
+}
+
 .userReserva {
     display: flex;
     width: 100vw;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     font-weight: bold;
     color: var(--verdeOscuro);
+    margin: auto;
 }
 
 .titulo {
     color: var(--verdeClaro);
+    font-size: 24px;
+}
+
+.titulo2 {
+    color: white;
     font-size: 24px;
 }
 
@@ -32,8 +50,7 @@
 
 .nombre {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .nombre p {
@@ -54,6 +71,8 @@
     margin: 5px;
 }
 
+
+
 /* CALENDARIO */
 
 .contCalendario {
@@ -64,6 +83,7 @@
     justify-content: space-evenly;
     padding: 2rem 5rem 2rem 5rem;
     background-color: var(--verdeOscuro);
+
     @media screen and (max-width: 1250px) {
         flex-direction: column;
         align-items: center;
@@ -81,7 +101,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    
+
 }
 
 .contImgCal h3 {
@@ -91,6 +111,7 @@
 .contCalendario img {
     display: flex;
     width: 10rem;
+
     @media screen and (max-width: 1250px) {
         width: 6rem;
     }
@@ -116,7 +137,7 @@
 }
 
 .applyButton {
-	background-color: var(--verdeClaro);
+    background-color: var(--verdeClaro);
     border: none;
     padding: 0.4rem 1rem;
     width: 10rem;
@@ -143,12 +164,12 @@
     display: flex;
     justify-content: center;
     color: var(--blanco);
-    font-family: "Poppins" ;
+    font-family: "Poppins";
     text-decoration: none;
     border-radius: 5px;
     padding: 10px;
     width: 130px;
-    background-color:var(--verdeClaro);
+    background-color: var(--verdeClaro);
     border: none;
     box-shadow: 0 8px 8px -10px rgba(0, 0, 0, 0.8);
     cursor: pointer;
@@ -157,5 +178,69 @@
 }
 
 .btReservas:hover {
+    background-color: var(--grisPlomo);
+}
+
+/* Metodo de pago */
+
+.radioContainer {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metodoPagoOptions {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* Centra verticalmente */
+    margin-bottom: 5px;
+}
+
+.radioLabel {
+    margin: 0;
+
+}
+
+.radioInput {
+    /* Estilos del borde para el radio button */
+    border: 2px solid #333;
+    /* Grosor del borde y color */
+    border-radius: 50%;
+    /* borde sea redondo */
+    width: 20px;
+    /* Ajusta el tamaño del radio button*/
+    height: 20px;
+}
+
+
+.btConfirmarReserva {
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    color: var(--blanco);
+    font-family: "Poppins";
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--verdeClaro);
+    border: none;
+    box-shadow: 0 8px 8px -10px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    font-weight: 550;
+    margin: 20px auto;
+    /* Auto margin para centrar verticalmente */
+    width: fit-content;
+    /* Ajusta el ancho al contenido */
+}
+
+
+.btConfirmarReserva:hover {
     background-color: var(--grisPlomo);
 }

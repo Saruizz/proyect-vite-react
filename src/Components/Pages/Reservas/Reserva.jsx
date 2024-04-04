@@ -26,6 +26,7 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 		endDate: new Date(),
 		key: 'selection',
 	});
+	const navigate = useNavigate();
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -38,7 +39,7 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 					{ correoElectronico: decode.email },
 					{ headers },
 				);
-				// console.log(response.data);
+
 				setUserData(response.data);
 			} catch (error) {
 				console.error('Error fetching user data:', error);
@@ -73,29 +74,32 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 					nombre: userData[0].nombre,
 					apellido: userData[0].apellido,
 					correoElectronico: userData[0].correoElectronico,
-					telefono: null, //userData[0].telefono ? userData[0].telefono : 0
+					telefono: null,
 				},
 				{ headers },
 			);
 			console.log(response.data);
 
 			if (response.data.success) {
-				setConfirmacion('¡Reserva confirmada!');
+				navigate('/confirReserva');
+				//setConfirmacion('¡Reserva confirmada!');
 			} else {
-				setConfirmacion('Hubo un error al confirmar la reserva.');
+				//	setConfirmacion('Hubo un error al confirmar la reserva.');
+				//setConfirmacion('¡Reserva confirmada!');
+				navigate('/confirReserva');
 			}
 
 			if (range[0]?.startDate != null && range[0]?.endDate != null) {
 				// Obtener el año, mes y día
 				const year = range[0].startDate.getFullYear();
-				const month = range[0].startDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+				const month = range[0].startDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que sumo 1
 				const day = range[0].startDate.getDate();
 
 				// Formatear la fecha en el formato "YYYY-MM-DD"
 				const fecha_entrega = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
 				const year1 = range[0].endDate.getFullYear();
-				const month1 = range[0].endDate.getMonth() + 1; // Los meses van de 0 a 11, por lo que necesitas sumar 1
+				const month1 = range[0].endDate.getMonth() + 1;
 				const day1 = range[0].endDate.getDate();
 
 				// Formatear la fecha en el formato "YYYY-MM-DD"
@@ -126,9 +130,11 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 				<DetalleProductoReserva />
 			</div>
 
-			<h2 className={styles.titulo}>Tu reserva</h2>
-
-			<h2>Datos del Usuario</h2>
+			<div className={styles.tuReservaContainer}>
+				<h2 className={styles.titulo2}>Tu reserva</h2>
+			</div>
+			<br />
+			<h2 className={styles.titulo}>Datos del Usuario</h2>
 			<div className={styles.userReserva}>
 				{userData && (
 					<>
@@ -142,14 +148,10 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 								<p>{userData[0].apellido}</p>
 							</span>
 						</div>
-						<div>
+						<div className={styles.correo}>
 							<h3>Correo electrónico</h3>
 							<p className={styles.p}>{userData[0].correoElectronico}</p>
 						</div>
-						{/*  <div>
-              <h3>Teléfono</h3>
-              <p className={styles.p}>{userData[0].telefono}</p>
-            </div> */}
 					</>
 				)}
 			</div>
@@ -212,17 +214,46 @@ const Reserva = ({ vehiculo = {}, usuario = {} }) => {
 					</div>
 				</div>
 
-				<h2>Elegir Método de Pago</h2>
-				<select
-					value={metodoPago}
-					onChange={e => setMetodoPago(e.target.value)}
-				>
-					<option value=''>Seleccione un método de pago</option>
-					<option value={1}>Tarjeta de Crédito</option>
-					<option value={2}>Transferencia Bancaria</option>
-				</select>
+				<div className={styles.radioContainer}>
+					<br />
+					<h2 className={styles.titulo}>Elegir Método de Pago</h2>
+					<br />
+					<div className={styles.metodoPagoOptions}>
+						<input
+							type='radio'
+							id='tarjeta'
+							name='metodoPago'
+							value='1'
+							checked={metodoPago === '1'}
+							onChange={e => setMetodoPago(e.target.value)}
+							className={styles.radioInput}
+						/>
+						<label className={styles.radioLabel} htmlFor='tarjeta'>
+							Tarjeta de Crédito
+						</label>
+					</div>
+
+					<div className={styles.metodoPagoOptions}>
+						<input
+							type='radio'
+							id='transferencia'
+							name='metodoPago'
+							value='2'
+							checked={metodoPago === '2'}
+							onChange={e => setMetodoPago(e.target.value)}
+							className={styles.radioInput}
+						/>
+						<label className={styles.radioLabel} htmlFor='transferencia'>
+							Transferencia Bancaria
+						</label>
+					</div>
+				</div>
 				<br />
-				<button type='submit'>Confirmar Reserva</button>
+				<button className={styles.btConfirmarReserva} type='submit'>
+					Confirmar Reserva
+				</button>
+
+				<br />
 			</form>
 
 			{confirmacion && <p>{confirmacion}</p>}
